@@ -1,7 +1,7 @@
 'use strict';
 
 import { Component } from 'react';
-import CalculatorActions from '../actions/CalculatorActions';
+import CalculatorActions from '../../actions/CalculatorActions';
 
 class Key extends Component {
 

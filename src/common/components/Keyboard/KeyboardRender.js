@@ -1,6 +1,6 @@
 'use strict';
 
-import Key from './Key';
+import Key from '../Key/Key';
 
 import React from 'react';
 

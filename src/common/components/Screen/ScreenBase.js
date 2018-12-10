@@ -1,7 +1,7 @@
 'use strict';
 
 import { Component } from 'react';
-import CalculatorStore from '../stores/CalculatorStore';
+import CalculatorStore from '../../stores/CalculatorStore';
 
 function getCalculatorState() {
   return {

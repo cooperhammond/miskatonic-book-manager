@@ -1,6 +1,6 @@
 'use strict';
 
-import Render from './AppRender';
+import Render from './AppRender/AppRender';
 
 import { Component } from 'react';
 
