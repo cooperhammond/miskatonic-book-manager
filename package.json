@@ -6,16 +6,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/benoitvallon/react-native-nw-react-calculator"
+    "url": "https://github.com/kepoorhampond/BookManager"
   },
-  "homepage": "https://github.com/benoitvallon/react-native-nw-react-calculator",
-  "keywords": [
-    "react",
-    "react-native",
-    "nw",
-    "flux",
-    "babel"
-  ],
   "src": "./",
   "test": "./test",
   "dist": "./dist",
