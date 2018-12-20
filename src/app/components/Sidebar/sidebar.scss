@@ -16,7 +16,7 @@
     background-color: #FFFFFF;
     color: #7e7e7e;
     padding: .5em .5em .5em .5em;
-    margin: 1em;
+    margin: 20px;
     font-size: 12px;
 
     text-align: center;
@@ -24,14 +24,14 @@
     transition: all 0.2s;
 
     .text {
-      margin-top: 1em;
+      margin-top: 15px;
     }
 
     img {
       -webkit-filter: grayscale(100%);
       transition: all 0.2s ease;
-      height: 3em;
-      width: 3em;
+      height: 50px;
+      width: 50px;
     }
   }
 
@@ -54,4 +54,8 @@
     width: 80%;
     padding: 0;
   }
+}
+
+.with-indicator {
+
 }

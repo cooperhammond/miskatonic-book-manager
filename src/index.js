@@ -5,6 +5,8 @@ import App from './app/components/AppRender/App';
 
 import * as serviceWorker from './helpers/serviceWorker';
 
+import "./main.scss";
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
