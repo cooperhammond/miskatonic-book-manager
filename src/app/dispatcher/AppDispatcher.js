@@ -2,6 +2,7 @@ import { Promise } from 'es6-promise';
 import assign from 'object-assign';
 
 var _callbacks = [];
+// eslint-disable-next-line
 var _promises = [];
 
 var Dispatcher = function() {};

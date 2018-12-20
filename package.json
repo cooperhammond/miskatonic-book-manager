@@ -7,7 +7,7 @@
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",
-    "dev" : "nf start",
+    "dev": "nf start",
     "electron": "electron .",
     "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron ."
   },

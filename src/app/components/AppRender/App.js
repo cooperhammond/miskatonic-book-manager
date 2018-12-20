@@ -1,4 +1,4 @@
-import Render from './AppRender/AppRender';
+import Render from './AppRender';
 
 import { Component } from 'react';
 
