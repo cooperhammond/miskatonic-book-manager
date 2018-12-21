@@ -7,6 +7,9 @@
   margin: auto;
   overflow-x: hidden;
 
+  padding-top: 10px;
+  padding-bottom: 10px;
+
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -16,15 +19,15 @@
     background-color: #FFFFFF;
     color: #7e7e7e;
     padding: .5em .5em .5em .5em;
-    margin: 20px;
+    margin: 5px 30px 5px 30px;
     font-size: 12px;
 
     text-align: center;
-    display: block;
-    transition: all 0.2s;
+    display: inline-block;
+    transition: all 0.2s ease;
 
     .text {
-      margin-top: 15px;
+      margin-top: 5px;
     }
 
     img {
@@ -36,7 +39,9 @@
   }
 
   .highlighted {
-    color: #000000;
+    .text {
+      color: #000000;
+    }
     img {
       -webkit-filter: grayscale(0%);
     }
@@ -51,11 +56,24 @@
     border-top: 1px solid #dfe7ed;
     display: block;
     height: 1px;
-    width: 80%;
+    width: 60%;
     padding: 0;
   }
-}
 
-.with-indicator {
+  .selector {
+    background-color: inherit;
+    display: inline-block;
+    width: 3px;
+    height: 40px;
 
+    transition: all 0.2s ease;
+
+    // Shift upwards
+    position: relative;
+    top: -15px;
+  }
+
+  .selector.highlighted {
+    background-color: #40a1ea;
+  }
 }
