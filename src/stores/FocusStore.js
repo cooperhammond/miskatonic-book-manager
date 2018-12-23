@@ -4,9 +4,6 @@ import assign from 'object-assign';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import FocusConstants from '../constants/FocusConstants';
 
-// const fs = require('fs');
-// var unflatten = require('flat').unflatten;
-
 var CHANGE_EVENT = 'change';
 
 var _generalViews = [

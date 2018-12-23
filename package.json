@@ -11,7 +11,7 @@
     "electron": "electron .",
     "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron ."
   },
-  "main": "src/electron-starter.js",
+  "main": "meta/electron-starter.js",
   "homepage": "./",
   "jest": {
     "moduleNameMapper": {
@@ -30,7 +30,6 @@
   ],
   "dependencies": {
     "es6-promise": "^4.2.5",
-    "flat": "^4.1.0",
     "keymirror": "^0.1.1",
     "node-sass": "^4.11.0",
     "react": "^16.6.3",
