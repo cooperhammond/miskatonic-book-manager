@@ -10,10 +10,8 @@
   padding-top: 10px;
   padding-bottom: 10px;
 
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  text-align: center;
 
   .button {
     background-color: #FFFFFF;
@@ -22,19 +20,28 @@
     margin: 5px 30px 5px 30px;
     font-size: 12px;
 
-    text-align: center;
     display: inline-block;
     transition: all 0.2s ease;
 
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+
     .text {
       margin-top: 5px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
     }
 
     img {
       -webkit-filter: grayscale(100%);
       transition: all 0.2s ease;
-      height: 50px;
-      width: 50px;
+      height: 35px;
+      width: 35px;
+      pointer-events: none; /* May limit onClick events */
     }
   }
 
@@ -54,7 +61,7 @@
   .sidebar-line {
     border: 0;
     border-top: 1px solid #dfe7ed;
-    display: block;
+    display: inline-block;
     height: 1px;
     width: 60%;
     padding: 0;
@@ -66,11 +73,12 @@
     width: 3px;
     height: 40px;
 
+    float: left;
     transition: all 0.2s ease;
 
     // Shift upwards
     position: relative;
-    top: -15px;
+    top: 20px;
   }
 
   .selector.highlighted {
