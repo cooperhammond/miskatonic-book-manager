@@ -1,18 +1,22 @@
+# inspiration folder
 inspo/
 
 # dependencies
-/node_modules
-/.pnp
+node_modules/
+.pnp/
 .pnp.js
 
+yarn-error.log
+
 # testing
-/coverage
+coverage/
 
 # production
-/build
+build/
 
 # misc
 .DS_Store
+.env
 .env.local
 .env.development.local
 .env.test.local

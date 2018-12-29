@@ -1,0 +1,13 @@
+{
+  "name": "miskatonic-server",
+  "version": "0.1.0",
+  "author": "Cooper Hammond",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongodb": "^3.1.10"
+  }
+}

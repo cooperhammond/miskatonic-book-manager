@@ -1,0 +1,48 @@
+{
+  "name": "miskatonic-client",
+  "author": "Cooper Hammond",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "jest",
+    "dev": "nf start",
+    "electron": "node meta/electron-wait-react.js"
+  },
+  "main": "meta/electron-starter.js",
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|scss|less)$": "identity-obj-proxy"
+    }
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "dependencies": {
+    "es6-promise": "^4.2.5",
+    "keymirror": "^0.1.1",
+    "node-sass": "^4.11.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-scripts": "2.1.1"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^23.6.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "electron": "^3.0.13",
+    "foreman": "^3.0.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^23.6.0",
+    "react-test-renderer": "^16.6.3"
+  }
+}
