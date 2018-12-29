@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "client": "cd client && yarn dev",
+    "client-web": "cd client && yarn start",
+    "client-desktop": "cd client && yarn electron",
     "server": "cd server && yarn start",
     "dev": "nf start"
   },

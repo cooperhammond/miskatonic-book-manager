@@ -1,0 +1,15 @@
+{
+  "Ethan Hunter": {
+    "email": "ethan@gmail.com",
+    "books": [
+      ["Life of Pi", 0]
+    ]
+  },
+  "Cooper Hammond": {
+    "email": "kepoorh@gmail.com",
+    "books": [
+      ["Life of Pi", 1],
+      ["1984", 0]
+    ]
+  }
+}

@@ -1,13 +1,19 @@
 {
-  "name": "miskatonic-server",
-  "version": "0.1.0",
+  "name": "miskatonic-client",
   "author": "Cooper Hammond",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "node server.js"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "dependencies": {
+    "bcrypt": "^3.0.3",
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "mongodb": "^3.1.10"
+    "flat": "^4.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
   }
 }
