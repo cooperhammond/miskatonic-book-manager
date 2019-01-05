@@ -4,9 +4,14 @@ const ObjectId = Schema.Types.ObjectId;
 
 const bookSchema = new Schema(
   {
-    _id: ObjectId,
-    title: String,
-    author: String,
+    title: {
+      type: String,
+      required: true
+    },
+    author: {
+      type: String,
+      required: true
+    },
     codes: [
       {
         type: ObjectId,
@@ -16,4 +21,5 @@ const bookSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model('Book', bookSchema);
+var Book = mongoose.model('Book', bookSchema);
+module.exports = Book;

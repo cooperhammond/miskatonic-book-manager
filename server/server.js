@@ -1,14 +1,14 @@
 // Gimme that .env
-require('dotenv').config()
+require('dotenv').config();
 
 const mongoose = require('mongoose');
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 
-const book = require("../data/book");
-const code = require("../data/code");
-const student = require("../data/student");
+const BookRoutes = require('./routes/BookRoutes');
+const CodeRoutes = require('./routes/CodeRoutes');
+const StudentRoutes = require('./routes/StudentRoutes');
 
 const app = express();
 const router = express.Router();
@@ -42,5 +42,7 @@ app.use(logger("dev"));
 // log that our server is up and running
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// append /api to http requests
-app.use("/api", router);
+// Set the corresponding routes for the three item types
+app.use('/books', BookRoutes);
+app.use('/codes', CodeRoutes);
+app.use('/students', StudentRoutes);

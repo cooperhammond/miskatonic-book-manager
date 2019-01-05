@@ -12,14 +12,14 @@ function codeGen() {
 
 const codeSchema = new Schema(
   {
-    _id: ObjectId,
     code: {
       type: String,
       default: codeGen
     },
     book: {
       type: ObjectId,
-      ref: 'Book'
+      ref: 'Book',
+      required: true,
     },
     user: {
       type: ObjectId,
@@ -29,4 +29,5 @@ const codeSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model('Code', codeSchema);
+var Code = mongoose.model('Code', codeSchema);
+module.exports = Code;

@@ -4,9 +4,14 @@ const ObjectId = Schema.Types.ObjectId;
 
 const studentSchema = new Schema(
   {
-    _id: Schema.Types.ObjectId,
-    name: String,
-    email: String,
+    name: {
+      type: String,
+      required: true
+    },
+    email: {
+      type: String,
+      required: true,
+    },
     codes: [
       {
         type: ObjectId,
@@ -16,4 +21,5 @@ const studentSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model('Student', studentSchema);
+var Student = mongoose.model('Student', studentSchema);
+module.exports = Student;
