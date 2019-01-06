@@ -3,11 +3,12 @@ const router = express.Router();
 
 const CodeController = require('../controllers/CodeController');
 
-router.post('/create', CodeController.create);    // CREATE!
+router.post('/create', CodeController.create);       // CREATE!
 
-router.get('/:id', CodeController.read);          // READ!
+router.get('/', CodeController.readAll);
+router.get('/:id', CodeController.readSingle);       // READ!
 
-router.put('/:id/update', CodeController.update)  // UPDATE!
+router.put('/:id/update', CodeController.update)     // UPDATE!
 
 router.delete('/:id/delete', CodeController.delete); // DESTROY!
 

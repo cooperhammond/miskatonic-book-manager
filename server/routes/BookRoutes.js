@@ -3,11 +3,12 @@ const router = express.Router();
 
 const BookController = require('../controllers/BookController');
 
-router.post('/create', BookController.create);    // CREATE!
+router.post('/create', BookController.create);       // CREATE!
 
-router.get('/:id', BookController.read);          // READ!
+router.get('/', BookController.readAll)
+router.get('/:id', BookController.readSingle);       // READ!
 
-router.put('/:id/update', BookController.update)  // UPDATE!
+router.put('/:id/update', BookController.update)     // UPDATE!
 
 router.delete('/:id/delete', BookController.delete); // DESTROY!
 

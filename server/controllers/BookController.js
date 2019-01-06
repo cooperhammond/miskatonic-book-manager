@@ -10,9 +10,7 @@ exports.create = function (req, res) {
 
   book.save(function (err) {
     if (err) {
-      res.send({
-        error: err
-      }); // There's an error! Alert the client!
+      res.send(err);      // There's an error! Alert the client!
       console.error(err); // There's an error! Alert us!
     } else {
       res.send({
@@ -22,12 +20,21 @@ exports.create = function (req, res) {
   })
 }
 
-exports.read = function (req, res) {
+exports.readAll = function (req, res) {
+  Book.find({}, function (err, books) {
+    if (err) {
+      res.send(err);      // There's an error! Alert the client!
+      console.error(err); // There's an error! Alert us!
+    } else {
+      res.send(books);
+    }
+  });
+}
+
+exports.readSingle = function (req, res) {
   Book.findById(req.params.id, function (err, book) {
     if (err) {
-      res.send({
-        error: err
-      }); // There's an error! Alert the client!
+      res.send(err);      // There's an error! Alert the client!
       console.error(err); // There's an error! Alert us!
     } else {
       res.send(book);
@@ -39,9 +46,7 @@ exports.update = function (req, res) {
   Book.findByIdAndUpdate(req.params.id, {$set: req.body},
     function (err, book) {
       if (err) {
-        res.send({
-          error: err
-        }); // There's an error! Alert the client!
+        res.send(err);      // There's an error! Alert the client!
         console.error(err); // There's an error! Alert us!
       } else {
         res.send({
@@ -54,9 +59,7 @@ exports.update = function (req, res) {
 exports.delete = function (req, res) {
   Book.findByIdAndRemove(req.params.id, function (err) {
     if (err) {
-      res.send({
-        error: err
-      }); // There's an error! Alert the client!
+      res.send(err);      // There's an error! Alert the client!
       console.error(err); // There's an error! Alert us!
     } else {
       res.send({
