@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+var cors = require('cors');
 
 const BookRoutes = require('./routes/BookRoutes');
 const CodeRoutes = require('./routes/CodeRoutes');
@@ -38,6 +39,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
+app.use(cors());
 
 // log that our server is up and running
 app.listen(port, () => console.log(`Listening on port ${port}`));
