@@ -50,17 +50,27 @@ var FocusStore = assign({}, EventEmitter.prototype, {
 
 });
 
-function processFocusChange(displayName, focusScope) {
+function processFocusChange(displayName, focusScope, id) {
   // Write the data to the stored variables
-  _focusScope = focusScope;
   _displayName = displayName;
+  _focusScope = focusScope;
 
   // Create a request variable and assign a new XMLHttpRequest object to it.
   var request = new XMLHttpRequest();
 
+
+  var url = "http://localhost:3200";
+
+  if (_focusScope == "general") {
+    url += "/" + _displayName.toLowerCase();
+  } else if (_focusScope == "student") {
+    url += "/students/" + id;
+  } else if (_focusScope == "book") {
+    url += "/books/" + id;
+  }
+
   // Open a new connection, using the GET request on the URL endpoint
-  request.open('GET', `http://localhost:3200/${_displayName.toLowerCase()}`,
-    true);
+  request.open('GET', url, true);
 
   request.onload = function () {
     var data = JSON.parse(this.response);
