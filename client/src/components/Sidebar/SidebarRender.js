@@ -5,7 +5,7 @@ import "./sidebar.scss";
 
 export default function () {
   return (
-    <div className='floating sidebar with-indicator'>
+    <div className='sidebar floating'>
       <FocusButton
         icon="assets/icons/student.svg"
         focusName="Students"
