@@ -40,6 +40,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
 app.use(cors());
+app.disable('etag');
 
 // log that our server is up and running
 app.listen(port, () => console.log(`Listening on port ${port}`));
