@@ -6,18 +6,21 @@ import FocusConstants from '../constants/FocusConstants';
 
 var CHANGE_EVENT = 'change';
 
-var _generalViews = [
-  "Students",
-  "Books",
-  "Codes"
-];
 var _focusScopes = [
   "general",
   "student",
   "book",
 ];
+var _generalViews = [
+  "Students",
+  "Books",
+  "Codes"
+];
 var _focusScope = _focusScopes[0];
 var _displayName = _generalViews[0];
+var _focusData;
+
+processFocusChange(_displayName, _focusScope);
 
 var FocusStore = assign({}, EventEmitter.prototype, {
 
@@ -27,6 +30,10 @@ var FocusStore = assign({}, EventEmitter.prototype, {
 
   getDisplayName: function() {
     return _displayName;
+  },
+
+  getFocusData: function() {
+    return _focusData;
   },
 
   emitChange: function() {
@@ -43,9 +50,26 @@ var FocusStore = assign({}, EventEmitter.prototype, {
 
 });
 
-function processFocusChange(focusName, focusScope) {
+function processFocusChange(displayName, focusScope) {
+  // Write the data to the stored variables
   _focusScope = focusScope;
-  _displayName = focusName;
+  _displayName = displayName;
+
+  // Create a request variable and assign a new XMLHttpRequest object to it.
+  var request = new XMLHttpRequest();
+
+  // Open a new connection, using the GET request on the URL endpoint
+  request.open('GET', `http://localhost:3200/${_displayName.toLowerCase()}`,
+    true);
+
+  request.onload = function () {
+    var data = JSON.parse(this.response);
+
+    _focusData = data;
+  }
+
+  // Send request
+  request.send();
 }
 
 FocusStore.dispatchToken = AppDispatcher.register(function(action) {
