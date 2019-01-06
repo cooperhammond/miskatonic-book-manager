@@ -61,11 +61,11 @@ function processFocusChange(displayName, focusScope, id) {
 
   var url = "http://localhost:3200";
 
-  if (_focusScope == "general") {
+  if (_focusScope === "general") {
     url += "/" + _displayName.toLowerCase();
-  } else if (_focusScope == "student") {
+  } else if (_focusScope === "student") {
     url += "/students/" + id;
-  } else if (_focusScope == "book") {
+  } else if (_focusScope === "book") {
     url += "/books/" + id;
   }
 
