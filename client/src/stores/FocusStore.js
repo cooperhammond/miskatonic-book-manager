@@ -6,18 +6,23 @@ import FocusConstants from '../constants/FocusConstants';
 
 var CHANGE_EVENT = 'change';
 
-var _generalViews = [
-  "Students",
-  "Books",
-  "Codes"
-];
 var _focusScopes = [
   "general",
   "student",
   "book",
 ];
+var _generalViews = [
+  "Students",
+  "Books",
+  "Codes"
+];
+var _cacheData = {};
 var _focusScope = _focusScopes[0];
 var _displayName = _generalViews[0];
+var _focusData;
+var _reload = false;
+
+processFocusChange(_displayName, _focusScope);
 
 var FocusStore = assign({}, EventEmitter.prototype, {
 
@@ -27,6 +32,10 @@ var FocusStore = assign({}, EventEmitter.prototype, {
 
   getDisplayName: function() {
     return _displayName;
+  },
+
+  getFocusData: function() {
+    return _focusData;
   },
 
   emitChange: function() {
@@ -43,9 +52,45 @@ var FocusStore = assign({}, EventEmitter.prototype, {
 
 });
 
-function processFocusChange(focusName, focusScope) {
+function processFocusChange(displayName, focusScope, id) {
+  // Write the data to the stored variables
+  _displayName = displayName;
   _focusScope = focusScope;
-  _displayName = focusName;
+
+  // Check that the server data doesn't need to be reloaded and that the data
+  // is already cached.
+  if (_reload === true || !(_displayName in _cacheData)) {
+
+    // Create a request variable and assign a new XMLHttpRequest object to it.
+    var request = new XMLHttpRequest();
+
+    var url = "http://localhost:3200";
+
+    if (_focusScope === "general") {
+      url += "/" + _displayName.toLowerCase();
+    } else if (_focusScope === "student") {
+      url += "/students/" + id;
+    } else if (_focusScope === "book") {
+      url += "/books/" + id;
+    }
+
+    // Open a new connection, using the GET request on the URL endpoint
+    request.open('GET', url, true);
+
+    request.onload = function () {
+      var data = JSON.parse(this.response);
+
+      _cacheData[_displayName] = data;
+      _focusData = data;
+      FocusStore.emitChange();
+    }
+
+    // Send request
+    request.send();
+  } else {
+    _focusData = _cacheData[_displayName];
+    FocusStore.emitChange();
+  }
 }
 
 FocusStore.dispatchToken = AppDispatcher.register(function(action) {
@@ -56,7 +101,7 @@ FocusStore.dispatchToken = AppDispatcher.register(function(action) {
       var focusScope = action.focusScope;
       if ( focusName !== undefined && focusScope !== undefined ) {
         processFocusChange(focusName, focusScope);
-        FocusStore.emitChange();
+        //FocusStore.emitChange();
       }
       break;
     default:
