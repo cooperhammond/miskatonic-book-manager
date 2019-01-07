@@ -59,7 +59,7 @@ function processFocusChange(displayName, focusScope, id) {
 
   // Check that the server data doesn't need to be reloaded and that the data
   // is already cached.
-  if (_reload == true || !(_displayName in _cacheData)) {
+  if (_reload === true || !(_displayName in _cacheData)) {
 
     // Create a request variable and assign a new XMLHttpRequest object to it.
     var request = new XMLHttpRequest();
