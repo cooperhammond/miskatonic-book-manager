@@ -1,5 +1,5 @@
 import Render from './FocusBoxRender';
-import Base from './FocusButtonBase';
+import Base from './FocusBoxBase';
 
 export default class FocusBox extends Base {
   render () {
