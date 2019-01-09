@@ -37,8 +37,8 @@ class FocusButton extends Component {
       labels = ["Name", "Email", "Codes"];
       accessors = ["name", "email", "codes"];
     } else if (displayName === "BOOKS") {
-      labels = ["Title", "Author", "Codes", "Readers"];
-      accessors = ["title", "author", "codes"];
+      labels = ["Title", "Codes", "Readers"];
+      accessors = ["title", "codes", "readers"];
     }
 
     if (rawData) {
@@ -60,9 +60,6 @@ class FocusButton extends Component {
             }
 
             rowData.push(element);
-
-          } else if (typeof accessor === "function") {
-            // TODO: Add function parsing funcitonality
           }
         }
 

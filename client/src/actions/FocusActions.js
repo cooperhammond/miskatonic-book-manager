@@ -10,7 +10,6 @@ var FocusActions = {
       focusName: focusName,
     });
   },
-
 };
 
 export default FocusActions;

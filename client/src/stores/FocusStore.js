@@ -5,6 +5,7 @@ import AppDispatcher from '../dispatcher/AppDispatcher';
 import FocusConstants from '../constants/FocusConstants';
 
 var CHANGE_EVENT = 'change';
+var SERVER_URL = "http://localhost:3200";
 
 var _focusScopes = [
   "general",
@@ -64,7 +65,7 @@ function processFocusChange(displayName, focusScope, id) {
     // Create a request variable and assign a new XMLHttpRequest object to it.
     var request = new XMLHttpRequest();
 
-    var url = "http://localhost:3200";
+    var url = SERVER_URL;
 
     if (_focusScope === "general") {
       url += "/" + _displayName.toLowerCase();
@@ -103,7 +104,7 @@ FocusStore.dispatchToken = AppDispatcher.register(function(action) {
         processFocusChange(focusName, focusScope);
         //FocusStore.emitChange();
       }
-      break;
+    break;
     default:
   }
 });

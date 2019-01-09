@@ -18,6 +18,10 @@ const bookSchema = new Schema(
         ref: 'Code'
       }
     ],
+    readers: {
+      type: Number,
+      default: 0
+    }
   }
 );
 
