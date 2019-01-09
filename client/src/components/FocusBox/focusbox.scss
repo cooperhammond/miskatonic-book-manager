@@ -1,10 +1,10 @@
 .focusbox {
-  width: 750px;
-  height: 200px;
+  width: auto;
+  padding: 1%;
+  overflow: hidden;
 
   .header {
-    margin: 20px;
-    font-size: 25px;
+    font-size: 3.4vh;
     color: #9cb7cb;
   }
 }

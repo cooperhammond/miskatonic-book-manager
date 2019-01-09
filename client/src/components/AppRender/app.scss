@@ -1,23 +1,23 @@
 /* S T I Z I L E S */
-body {
-  margin: 0;
-  padding: 0;
+html, body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
+  background: #f8fafc;
+
+  margin: 0;
+  padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  background: #f8fafc;
-}
-
-/* m a k e  i t  F L O A T */
-.floating {
-  margin: 20px;
-  border-radius: 6px;
-  box-shadow: 0px 0px 5px 1px #dadde0;
-  background-color: white;
 }
 
 .main {
   display: flex;
+}
+
+/* m a k e  i t  F L O A T */
+.floating {
+  margin: 2%;
+  border-radius: 6px;
+  box-shadow: 0px 0px 5px 1px #dadde0;
+  background-color: white;
 }

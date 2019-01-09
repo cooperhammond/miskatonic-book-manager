@@ -1,0 +1,40 @@
+.focus-table {
+  border-collapse: collapse;
+
+  font-size: 2vh;
+
+  tbody, thead {
+    display: block;
+  }
+
+  td, th {
+    border-bottom: 1px solid #ddd;
+    padding: 2vh;
+    min-width: 25vh;
+    max-width: 25vh;
+  }
+
+  th {
+    padding-top: 2.4vh;
+    padding-bottom: 2vh;
+    text-align: left;
+  }
+
+  tbody {
+    height: 40vh;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    tr:nth-child(odd){
+      background-color: #f9f9f9;
+    }
+    tr:nth-child(even){
+      background-color: #ffffff;
+    }
+
+    tr:hover {
+      background-color: #f2f2f2;
+    }
+  }
+}

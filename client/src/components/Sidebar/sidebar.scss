@@ -1,26 +1,28 @@
 /* Sidebar! */
 .sidebar {
-  width: auto;
+  min-height: 10vh;
+
   z-index: 1;
   top: auto;
-  overflow-x: hidden;
+  overflow-y: hidden;
 
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: .5em;
+  padding-bottom: .5em;
 
-  display: grid;
+  display: table;
   text-align: center;
 
   .button {
+    font-size: 1.4vh;
     background-color: #FFFFFF;
     color: #7e7e7e;
     padding: .5em .5em .5em .5em;
-    margin: 5px 30px 5px 30px;
-    font-size: 12px;
+    margin: .5em 2.5em .5em 2.5em;
 
     display: inline-block;
     transition: all 0.2s ease;
 
+    // Make it act like a button, not a document
     user-drag: none;
     user-select: none;
     -moz-user-select: none;
@@ -29,7 +31,7 @@
     -ms-user-select: none;
 
     .text {
-      margin-top: 5px;
+      margin-top: 1vh;
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
     }
@@ -37,9 +39,8 @@
     img {
       -webkit-filter: grayscale(100%);
       transition: all 0.2s ease;
-      height: 35px;
-      width: 35px;
-      pointer-events: none; /* May limit onClick events */
+      height: 4.5vh;
+      pointer-events: none; // WARNING: May limit onClick events
     }
   }
 
@@ -66,17 +67,20 @@
   }
 
   .selector {
+    font-size: 0;
+    margin-right: -.4vh;
     background-color: inherit;
     display: inline-block;
-    width: 3px;
-    height: 40px;
+    width: .4vh;
+    height: 5vh;
 
     float: left;
     transition: all 0.2s ease;
 
     // Shift upwards
     position: relative;
-    top: 20px;
+    top: 2.3vh
+
   }
 
   .selector.highlighted {

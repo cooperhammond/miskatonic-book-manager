@@ -1,5 +1,7 @@
 import React from 'react';
 
+import "./focustable.scss";
+
 export default function (props, state) {
 
   var labels = [];
@@ -41,11 +43,13 @@ export default function (props, state) {
   }
 
   return (
-    <table>
-      <tbody>
+    <table className="focus-table">
+      <thead>
         <tr>
           {labels}
         </tr>
+      </thead>
+      <tbody>
         {rows}
       </tbody>
     </table>
