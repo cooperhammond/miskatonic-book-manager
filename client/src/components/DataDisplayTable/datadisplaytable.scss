@@ -1,14 +1,3 @@
-.focusbox {
-  width: auto;
-  padding: 1%;
-  overflow: hidden;
-
-  .header {
-    font-size: 3.4vh;
-    color: #9cb7cb;
-  }
-}
-
 .focus-table {
   border-collapse: collapse;
 
@@ -23,6 +12,8 @@
     padding: 2vh;
     min-width: 25vh;
     max-width: 25vh;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   th {
