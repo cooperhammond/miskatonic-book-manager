@@ -10,6 +10,11 @@ var FocusActions = {
       focusName: focusName,
     });
   },
+  itemAdded: function() {
+    AppDispatcher.dispatch({
+      type: FocusConstants.NEED_RELOAD,
+    });
+  }
 };
 
 export default FocusActions;

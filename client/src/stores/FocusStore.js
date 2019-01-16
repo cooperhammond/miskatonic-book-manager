@@ -1,6 +1,8 @@
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 
+import request from 'request';
+
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import FocusConstants from '../constants/FocusConstants';
 
@@ -53,6 +55,30 @@ var FocusStore = assign({}, EventEmitter.prototype, {
 
 });
 
+FocusStore.dispatchToken = AppDispatcher.register(function(action) {
+  switch(action.type) {
+    case FocusConstants.FOCUS_SWITCHED:
+      var focusName = action.focusName;
+      var focusScope = action.focusScope;
+      if ( focusName !== undefined && focusScope !== undefined ) {
+        processFocusChange(focusName, focusScope);
+      }
+    break;
+    case FocusConstants.NEED_RELOAD:
+      _reload = true;
+      if (_focusScope === "general") {
+        getData("", updateData);
+      } else {
+        getData(_focusData._id, updateData);
+      }
+      FocusStore.emitChange();
+    break;
+    default:
+  }
+});
+
+export default FocusStore;
+
 function processFocusChange(displayName, focusScope, id) {
   // Write the data to the stored variables
   _displayName = displayName;
@@ -62,51 +88,36 @@ function processFocusChange(displayName, focusScope, id) {
   // is already cached.
   if (_reload === true || !(_displayName in _cacheData)) {
 
-    // Create a request variable and assign a new XMLHttpRequest object to it.
-    var request = new XMLHttpRequest();
+    getData(id, updateData);
 
-    var url = SERVER_URL;
-
-    if (_focusScope === "general") {
-      url += "/" + _displayName.toLowerCase();
-    } else if (_focusScope === "student") {
-      url += "/students/" + id;
-    } else if (_focusScope === "book") {
-      url += "/books/" + id;
-    }
-
-    // Open a new connection, using the GET request on the URL endpoint
-    request.open('GET', url, true);
-
-    request.onload = function () {
-      var data = JSON.parse(this.response);
-
-      _cacheData[_displayName] = data;
-      _focusData = data;
-      FocusStore.emitChange();
-    }
-
-    // Send request
-    request.send();
   } else {
     _focusData = _cacheData[_displayName];
     FocusStore.emitChange();
   }
 }
 
-FocusStore.dispatchToken = AppDispatcher.register(function(action) {
+function getData(id, callback) {
 
-  switch(action.type) {
-    case FocusConstants.FOCUS_SWITCHED:
-      var focusName = action.focusName;
-      var focusScope = action.focusScope;
-      if ( focusName !== undefined && focusScope !== undefined ) {
-        processFocusChange(focusName, focusScope);
-        //FocusStore.emitChange();
-      }
-    break;
-    default:
+  var url = SERVER_URL;
+
+  if (_focusScope === "general" || id === "") {
+    url += "/" + _displayName.toLowerCase();
+  } else if (_focusScope === "student") {
+    url += "/students/" + id;
+  } else if (_focusScope === "book") {
+    url += "/books/" + id;
   }
-});
 
-export default FocusStore;
+  request.get(url, { json: true }, callback)
+}
+
+function updateData(err, res, body) {
+  if (err) {
+    return console.log(err);
+  }
+
+  _cacheData[_displayName] = body;
+  _focusData = body;
+  _reload = false;
+  FocusStore.emitChange();
+}

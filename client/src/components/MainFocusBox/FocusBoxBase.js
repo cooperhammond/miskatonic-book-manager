@@ -8,6 +8,7 @@ class FocusButton extends Component {
     super(props);
     this.state = {
       displayName: null,
+      itemType: null,
       labels: [],
       rows: []
     };
@@ -27,6 +28,7 @@ class FocusButton extends Component {
 
   _onChange() {
     var displayName = FocusStore.getDisplayName().toUpperCase();
+    var itemType = displayName.toLowerCase().slice(0, -1);
     var rawData = FocusStore.getFocusData();
 
     var labels = [];
@@ -69,6 +71,7 @@ class FocusButton extends Component {
 
     this.setState({
       displayName: displayName,
+      itemType: itemType,
       labels: labels,
       rows: rows
     });
