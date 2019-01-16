@@ -10,11 +10,13 @@ var FocusActions = {
       focusName: focusName,
     });
   },
-  itemAdded: function() {
+  addItem: function(itemType, itemProperties) {
     AppDispatcher.dispatch({
-      type: FocusConstants.NEED_RELOAD,
+      type: FocusConstants.ITEM_ADDED,
+      itemType: itemType,
+      itemProperties: itemProperties,
     });
-  }
+  },
 };
 
 export default FocusActions;

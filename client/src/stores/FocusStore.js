@@ -64,14 +64,12 @@ FocusStore.dispatchToken = AppDispatcher.register(function(action) {
         processFocusChange(focusName, focusScope);
       }
     break;
-    case FocusConstants.NEED_RELOAD:
-      _reload = true;
-      if (_focusScope === "general") {
-        getData("", updateData);
-      } else {
-        getData(_focusData._id, updateData);
+    case FocusConstants.ITEM_ADDED:
+      var itemType = action.itemType;
+      var itemProperties = action.itemProperties;
+      if ( itemType !== undefined && itemProperties !== undefined ) {
+        addItem(itemType, itemProperties, reloadItems);
       }
-      FocusStore.emitChange();
     break;
     default:
   }
@@ -119,5 +117,21 @@ function updateData(err, res, body) {
   _cacheData[_displayName] = body;
   _focusData = body;
   _reload = false;
+  FocusStore.emitChange();
+}
+
+function addItem(itemType, itemProperties, callback) {
+  var url = SERVER_URL + "/" + _displayName.toLowerCase() + '/create';
+
+  request.post(url, { form: itemProperties }, callback);
+}
+
+function reloadItems(err, res, body) {
+  if (err) {
+    return console.log(err);
+  }
+  console.log("this");
+
+  getData("", updateData);
   FocusStore.emitChange();
 }
