@@ -3,7 +3,8 @@ const Student = require('../models/StudentModel');
 exports.create = function (req, res) {
   let student = new Student(
     {
-      name: req.body.name,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       email: req.body.email
     }
   );

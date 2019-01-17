@@ -4,9 +4,13 @@ const ObjectId = Schema.Types.ObjectId;
 
 const studentSchema = new Schema(
   {
-    name: {
+    firstName: {
       type: String,
       required: true
+    },
+    lastName: {
+      type: String,
+      required: true,
     },
     email: {
       type: String,
