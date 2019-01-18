@@ -4,7 +4,7 @@ import assign from 'object-assign';
 import request from 'request';
 
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import FocusConstants from '../constants/FocusConstants';
+import FocusActionTypes from '../constants/FocusActionTypes';
 
 var CHANGE_EVENT = 'change';
 var SERVER_URL = "http://localhost:3200";
@@ -57,14 +57,14 @@ var FocusStore = assign({}, EventEmitter.prototype, {
 
 FocusStore.dispatchToken = AppDispatcher.register(function(action) {
   switch(action.type) {
-    case FocusConstants.FOCUS_SWITCHED:
+    case FocusActionTypes.FOCUS_SWITCHED:
       var focusName = action.focusName;
       var focusScope = action.focusScope;
       if ( focusName !== undefined && focusScope !== undefined ) {
         processFocusChange(focusName, focusScope);
       }
     break;
-    case FocusConstants.ITEM_ADDED:
+    case FocusActionTypes.ITEM_ADDED:
       var itemType = action.itemType;
       var itemProperties = action.itemProperties;
       if ( itemType !== undefined && itemProperties !== undefined ) {
@@ -114,10 +114,26 @@ function updateData(err, res, body) {
     return console.log(err);
   }
 
+  if (_displayName === "Students" ) {
+    body = sortData("name", body);
+  }
+
   _cacheData[_displayName] = body;
   _focusData = body;
   _reload = false;
   FocusStore.emitChange();
+}
+
+function sortData(key, data) {
+  return data.sort(function(a, b) {
+    return keySort(key, a, b);
+  });
+}
+
+function keySort(key, a, b) {
+  if(a[key] < b[key]) { return -1; }
+  if(a[key] > b[key]) { return 1; }
+  return 0;
 }
 
 function addItem(itemType, itemProperties, callback) {
