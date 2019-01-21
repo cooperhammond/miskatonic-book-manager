@@ -4,15 +4,15 @@ import "./datadisplaytable.scss";
 
 export default function (props, state) {
 
-  var labels = props.labels.map(function (label) {
-    return <th key={label}>{label}</th>;
+  var labels = props.labels.map(function (label, index) {
+    return <th key={label + index}>{label}</th>;
   });
 
-  var rows = props.rows.map(function (row) {
+  var rows = props.rows.map(function (row, index) {
     return (
-      <tr key={row}>
-        {row.map(function (element) {
-          return <td key={element}>{element}</td>;
+      <tr key={row + index}>
+        {row.map(function (element, index_) {
+          return <td key={element + index_}>{element}</td>;
         })}
       </tr>
     )
