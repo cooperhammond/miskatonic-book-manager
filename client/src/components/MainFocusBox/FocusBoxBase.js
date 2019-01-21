@@ -1,6 +1,7 @@
 import { Component } from 'react';
 
 import FocusStore from '../../stores/FocusStore';
+import DataStore from '../../stores/DataStore';
 
 class FocusButton extends Component {
 
@@ -19,28 +20,32 @@ class FocusButton extends Component {
 
   componentDidMount() {
     FocusStore.addChangeListener(this._onChange);
+    DataStore.addChangeListener(this._onChange);
     this._onChange();
   }
 
   componentWillUnmount() {
     FocusStore.removeChangeListener(this._onChange);
+    DataStore.addChangeListener(this._onChange);
   }
 
   _onChange() {
     var displayName = FocusStore.getDisplayTitle();
     var itemType = FocusStore.getItemType();
-    var rawData = FocusStore.getFocusStore().getItems();
+    var rawData = DataStore.getItems(itemType);
 
     var labels = [];
     var accessors = [];
     var rows = [];
 
-    if (displayName === "STUDENTS") {
+    if (itemType === "student") {
       labels = ["Name", "Email", "Codes"];
       accessors = ["name", "email", "codes"];
-    } else if (displayName === "BOOKS") {
+    } else if (itemType === "book") {
       labels = ["Title", "Codes", "Readers"];
       accessors = ["title", "codes", "readers"];
+    } else if (itemType === "code") {
+      // TODO: figure out what to use for labels and accessors here
     }
 
     if (rawData) {

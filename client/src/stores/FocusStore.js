@@ -4,9 +4,7 @@ import assign from 'object-assign';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import FocusActionTypes from '../constants/FocusActionTypes';
 
-import StudentStore from './StudentStore';
-import BookStore from './BookStore';
-import CodeStore from './CodeStore';
+import DataStore from './DataStore';
 
 var CHANGE_EVENT = 'change';
 
@@ -23,13 +21,6 @@ var _scopes = {
   code:    "code"
 }
 
-// `itemType`: store
-var _stores = {
-  student: StudentStore,
-  book:    BookStore,
-  code:    CodeStore
-}
-
 // `itemType`: `displayTitle`
 var _generalDisplayTitles = {
   student: "STUDENTS",
@@ -42,7 +33,6 @@ var _generalDisplayTitles = {
 //    item type = student
 var _scope = _scopes.general;
 var _itemType = _itemTypes.student;
-var _store = _stores[_itemType];
 
 var _focusItem;
 var _displayTitle = updateDisplayTitle();
@@ -60,10 +50,6 @@ let FocusStore = assign({}, EventEmitter.prototype, {
 
   getItemType: function() {
     return _itemType;
-  },
-
-  getFocusStore: function() {
-    return _store;
   },
 
   emitChange: function() {
@@ -115,12 +101,8 @@ function changeView (args) {
     _itemType = newItemType;
   }
 
-  if (Object.keys(_stores).includes(_itemType)) {
-    _store = _stores[_itemType];
-  }
-
   if (itemId) {
-    _focusItem = _stores.getItem(itemId);
+    _focusItem = DataStore.getItem(_itemType, itemId);
   }
 
   updateDisplayTitle();
@@ -128,7 +110,7 @@ function changeView (args) {
 }
 
 function updateDisplayTitle() {
-  
+
   if (_scope === _scopes.general) {
 
     _displayTitle = _generalDisplayTitles[_itemType];

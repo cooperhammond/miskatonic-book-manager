@@ -18,7 +18,7 @@ var _data = {
 var _itemTypeDomains = {
   student: "students",
   book: "books",
-  code: "code"
+  code: "codes"
 }
 
 var _itemSortKeys = {
@@ -71,24 +71,24 @@ DataStore.dispatchToken = AppDispatcher.register(function(action) {
       }
     break;
     case DataActionTypes.UPDATE_ITEM:
-      if ( action.itemType !=== undefined &&
+      if ( action.itemType !== undefined &&
            action.id !== undefined &&
            action.data !== undefined ) {
-        updateCode(action.itemType, action.id, action.data);
+        updateItem(action.itemType, action.id, action.data);
       }
     break;
     case DataActionTypes.DELETE_ITEM:
       if ( action.itemType !== undefined &&
            action.id !== undefined &&
            action.data !== undefined ) {
-        deleteCode(action.itemType, action.id, action.data);
+        deleteItem(action.itemType, action.id, action.data);
       }
     break;
     default:
   }
 });
 
-export default CodeStore;
+export default DataStore;
 
 function createItem(itemType, data) {
   var url = SERVER_URL + `/${_itemTypeDomains[itemType]}/create`;
