@@ -128,8 +128,11 @@ function changeView (args) {
 }
 
 function updateDisplayTitle() {
+  
   if (_scope === _scopes.general) {
+
     _displayTitle = _generalDisplayTitles[_itemType];
+
   } else {
     var item = _focusItem;
 
