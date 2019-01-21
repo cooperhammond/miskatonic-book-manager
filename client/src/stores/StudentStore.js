@@ -14,12 +14,12 @@ var _students = [];
 readStudents(updateData);
 
 var StudentStore = assign({}, EventEmitter.prototype, {
-  getStudents: function() {
+  getItems: function() {
     return _students;
   },
 
   // Returns student object if found, else, return null
-  getStudent: function(id) {
+  getItem: function(id) {
     return _students.find(obj => {
       return obj._id === id;
     });
@@ -42,26 +42,23 @@ var StudentStore = assign({}, EventEmitter.prototype, {
 StudentStore.dispatchToken = AppDispatcher.register(function(action) {
   switch(action.type) {
     case StudentActionTypes.CREATE_STUDENT:
-      var data = action.data;
-      if ( data !== undefined ) {
-        createStudent(data, updateData);
+      if ( action.data !== undefined ) {
+        createStudent(action.data, updateData);
       }
     break;
     case StudentActionTypes.READ_STUDENTS:
       readStudents(updateData);
     break;
     case StudentActionTypes.UPDATE_STUDENT:
-      var id = action.id;
-      var data = action.data;
-      if ( id !== undefined && data !== undefined ) {
-        updateStudent(id, data, updateData);
+      if ( action.id !== undefined &&
+           action.data !== undefined ) {
+        updateStudent(action.id, action.data, updateData);
       }
     break;
     case StudentActionTypes.DELETE_STUDENT:
-      var id = action.id;
-      var data = action.data;
-      if ( id !== undefined && data !== undefined ) {
-        deleteStudent(id, data, updateData);
+      if ( action.id !== undefined &&
+           action.data !== undefined ) {
+        deleteStudent(action.id, action.data, updateData);
       }
     break;
     default:

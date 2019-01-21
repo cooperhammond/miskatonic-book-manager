@@ -27,9 +27,9 @@ class FocusButton extends Component {
   }
 
   _onChange() {
-    var displayName = FocusStore.getDisplayName().toUpperCase();
-    var itemType = displayName.toLowerCase().slice(0, -1);
-    var rawData = FocusStore.getFocusData();
+    var displayName = FocusStore.getDisplayTitle();
+    var itemType = FocusStore.getItemType();
+    var rawData = FocusStore.getFocusStore().getItems();
 
     var labels = [];
     var accessors = [];

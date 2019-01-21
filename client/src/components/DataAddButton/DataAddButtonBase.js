@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import FocusActions from '../../actions/FocusActions';
 
 class DataAddButton extends Component {
 
@@ -21,7 +20,7 @@ class DataAddButton extends Component {
     var dataInfo = askDataQuestions(this.props.itemType);
 
     if (dataInfo) {
-      FocusActions.addItem(this.props.itemType, dataInfo);
+      this.props.store.addItem(this.props.itemType, dataInfo);
     }
   }
 

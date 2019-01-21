@@ -1,44 +1,69 @@
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 
-import request from 'request';
-
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import FocusActionTypes from '../constants/FocusActionTypes';
 
+import StudentStore from './StudentStore';
+import BookStore from './BookStore';
+import CodeStore from './CodeStore';
+
 var CHANGE_EVENT = 'change';
-var SERVER_URL = "http://localhost:3200";
 
-var _focusScopes = [
-  "general",
-  "student",
-  "book",
-];
-var _generalViews = [
-  "Students",
-  "Books",
-  "Codes"
-];
-var _cacheData = {};
-var _focusScope = _focusScopes[0];
-var _displayName = _generalViews[0];
-var _focusData;
-var _reload = false;
+var _itemTypes = {
+  student: "student",
+  book:    "book",
+  code:    "code"
+}
 
-processFocusChange(_displayName, _focusScope);
+var _scopes = {
+  general: "general",
+  student: "student",
+  book:    "book",
+  code:    "code"
+}
 
-var FocusStore = assign({}, EventEmitter.prototype, {
+// `itemType`: store
+var _stores = {
+  student: StudentStore,
+  book:    BookStore,
+  code:    CodeStore
+}
+
+// `itemType`: `displayTitle`
+var _generalDisplayTitles = {
+  student: "STUDENTS",
+  book:    "BOOKS",
+  code:    "CODES"
+}
+
+// default:
+//    scope = general
+//    item type = student
+var _scope = _scopes.general;
+var _itemType = _itemTypes.student;
+var _store = _stores[_itemType];
+
+var _focusItem;
+var _displayTitle = updateDisplayTitle();
+
+
+let FocusStore = assign({}, EventEmitter.prototype, {
 
   getFocusScope: function() {
-    return _focusScope;
+    return _scope;
   },
 
-  getDisplayName: function() {
-    return _displayName;
+  getDisplayTitle: function() {
+    return _displayTitle;
   },
 
-  getFocusData: function() {
-    return _focusData;
+  getItemType: function() {
+    return _itemType;
+  },
+
+  getFocusStore: function() {
+    return _store;
   },
 
   emitChange: function() {
@@ -57,18 +82,11 @@ var FocusStore = assign({}, EventEmitter.prototype, {
 
 FocusStore.dispatchToken = AppDispatcher.register(function(action) {
   switch(action.type) {
-    case FocusActionTypes.FOCUS_SWITCHED:
-      var focusName = action.focusName;
-      var focusScope = action.focusScope;
-      if ( focusName !== undefined && focusScope !== undefined ) {
-        processFocusChange(focusName, focusScope);
-      }
-    break;
-    case FocusActionTypes.ITEM_ADDED:
-      var itemType = action.itemType;
-      var itemProperties = action.itemProperties;
-      if ( itemType !== undefined && itemProperties !== undefined ) {
-        addItem(itemType, itemProperties, reloadItems);
+    case FocusActionTypes.VIEW_CHANGED:
+      var args = action.args;
+      if ( args !== {} ) {
+        changeView(args);
+        FocusStore.emitChange();
       }
     break;
     default:
@@ -77,77 +95,61 @@ FocusStore.dispatchToken = AppDispatcher.register(function(action) {
 
 export default FocusStore;
 
-function processFocusChange(displayName, focusScope, id) {
-  // Write the data to the stored variables
-  _displayName = displayName;
-  _focusScope = focusScope;
 
-  // Check that the server data doesn't need to be reloaded and that the data
-  // is already cached.
-  if (_reload === true || !(_displayName in _cacheData)) {
+// args = {
+//   newScope    : scope,
+//   newItemType : itemType,
+//   itemId      : itemId  (only if the scope is not general)
+// }
+function changeView (args) {
 
-    getData(id, updateData);
+  var newScope    = args.newScope;
+  var newItemType = args.newItemType;
+  var itemId      = args.itemId;
 
+  if (Object.values(_scopes).includes(newScope)) {
+    _scope = newScope;
+  }
+
+  if (Object.values(_itemTypes).includes(newItemType)) {
+    _itemType = newItemType;
+  }
+
+  if (Object.keys(_stores).includes(_itemType)) {
+    _store = _stores[_itemType];
+  }
+
+  if (itemId) {
+    _focusItem = _stores.getItem(itemId);
+  }
+
+  updateDisplayTitle();
+  FocusStore.emitChange();
+}
+
+function updateDisplayTitle() {
+  if (_scope === _scopes.general) {
+    _displayTitle = _generalDisplayTitles[_itemType];
   } else {
-    _focusData = _cacheData[_displayName];
-    FocusStore.emitChange();
-  }
-}
+    var item = _focusItem;
 
-function getData(id, callback) {
+    if (_itemType === _itemTypes.student) {
 
-  var url = SERVER_URL;
+      // Student title view
+      _displayTitle = `${item.lastName}, ${item.firstName}`;
 
-  if (_focusScope === "general" || id === "") {
-    url += "/" + _displayName.toLowerCase();
-  } else if (_focusScope === "student") {
-    url += "/students/" + id;
-  } else if (_focusScope === "book") {
-    url += "/books/" + id;
-  }
+    } else if (_itemType === _itemTypes.book) {
 
-  request.get(url, { json: true }, callback)
-}
+      // Book title view
+      _displayTitle = `${item.title} by ${item.author}`;
 
-function updateData(err, res, body) {
-  if (err) {
-    return console.log(err);
+    } else if (_itemType === _itemTypes.code) {
+
+      // Code title view
+      _displayTitle = `Code: ${item.code}`;
+
+    }
   }
 
-  if (_displayName === "Students" ) {
-    body = sortData("name", body);
-  }
-
-  _cacheData[_displayName] = body;
-  _focusData = body;
-  _reload = false;
-  FocusStore.emitChange();
-}
-
-function sortData(key, data) {
-  return data.sort(function(a, b) {
-    return keySort(key, a, b);
-  });
-}
-
-function keySort(key, a, b) {
-  if(a[key] < b[key]) { return -1; }
-  if(a[key] > b[key]) { return 1; }
-  return 0;
-}
-
-function addItem(itemType, itemProperties, callback) {
-  var url = SERVER_URL + "/" + _displayName.toLowerCase() + '/create';
-
-  request.post(url, { form: itemProperties }, callback);
-}
-
-function reloadItems(err, res, body) {
-  if (err) {
-    return console.log(err);
-  }
-  console.log("this");
-
-  getData("", updateData);
-  FocusStore.emitChange();
+  return _displayTitle;
 }

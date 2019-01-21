@@ -3,18 +3,10 @@ import FocusActionTypes from '../constants/FocusActionTypes';
 
 var FocusActions = {
 
-  switchFocus: function(focusScope, focusName) {
+  changeView: function(args) {
     AppDispatcher.dispatch({
-      type: FocusActionTypes.FOCUS_SWITCHED,
-      focusScope: focusScope,
-      focusName: focusName,
-    });
-  },
-  addItem: function(itemType, itemProperties) {
-    AppDispatcher.dispatch({
-      type: FocusActionTypes.ITEM_ADDED,
-      itemType: itemType,
-      itemProperties: itemProperties,
+      type: FocusActionTypes.VIEW_CHANGED,
+      args: args,
     });
   },
 };

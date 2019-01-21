@@ -14,12 +14,12 @@ var _codes = [];
 readCodes(updateData);
 
 var CodeStore = assign({}, EventEmitter.prototype, {
-  getCodes: function() {
+  getItems: function() {
     return _codes;
   },
 
   // Returns code object if found, else, return null
-  getCode: function(id) {
+  getItem: function(id) {
     return _codes.find(obj => {
       return obj._id === id;
     });
@@ -42,26 +42,23 @@ var CodeStore = assign({}, EventEmitter.prototype, {
 CodeStore.dispatchToken = AppDispatcher.register(function(action) {
   switch(action.type) {
     case CodeActionTypes.CREATE_STUDENT:
-      var data = action.data;
-      if ( data !== undefined ) {
-        createCode(data, updateData);
+      if ( action.data !== undefined ) {
+        createCode(action.data, updateData);
       }
     break;
     case CodeActionTypes.READ_STUDENTS:
       readCodes(updateData);
     break;
     case CodeActionTypes.UPDATE_STUDENT:
-      var id = action.id;
-      var data = action.data;
-      if ( id !== undefined && data !== undefined ) {
-        updateCode(id, data, updateData);
+      if ( action.id !== undefined &&
+           action.data !== undefined ) {
+        updateCode(action.id, action.data, updateData);
       }
     break;
     case CodeActionTypes.DELETE_STUDENT:
-      var id = action.id;
-      var data = action.data;
-      if ( id !== undefined && data !== undefined ) {
-        deleteCode(id, data, updateData);
+      if ( action.id !== undefined &&
+           action.data !== undefined ) {
+        deleteCode(action.id, action.data, updateData);
       }
     break;
     default:
@@ -100,7 +97,7 @@ function updateData(err, res, body) {
   }
 
   // Sort the data alphabetically
-  _codes = sortData("lastName", body);
+  _codes = sortData("code", body);
 
   CodeStore.emitChange();
 }

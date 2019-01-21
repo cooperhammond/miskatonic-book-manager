@@ -19,7 +19,10 @@ class FocusButton extends Component {
   }
 
   handleClick() {
-    FocusActions.switchFocus(this.props.focusScope, this.props.focusName);
+    FocusActions.changeView({
+      newScope: this.props.focusScope,
+      newItemType: this.props.itemType
+    });
   }
 
   onMouseDown() {
@@ -44,7 +47,7 @@ class FocusButton extends Component {
   }
 
   _onChange() {
-    if ( FocusStore.getDisplayName() === this.props.focusName &&
+    if ( FocusStore.getItemType() === this.props.itemType &&
          FocusStore.getFocusScope() === this.props.focusScope) {
       this.setState({
         isHighlighted: true,

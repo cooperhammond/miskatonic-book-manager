@@ -22,9 +22,9 @@ export default function (props, state) {
         onMouseUp={this.onMouseUp}
         onMouseLeave={this.onMouseUp}
       >
-        <img className="icon" alt={props.focusName} src={props.icon} />
+        <img className="icon" alt={props.displayName} src={props.icon} />
         <div className={"text"}>
-          {props.focusName}
+          {props.displayName}
         </div>
       </div>
     </div>

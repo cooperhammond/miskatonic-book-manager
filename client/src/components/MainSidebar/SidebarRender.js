@@ -8,19 +8,22 @@ export default function () {
     <div className='sidebar floating'>
       <SideFocusButton
         icon="assets/icons/student.svg"
-        focusName="Students"
+        displayName="Students"
+        itemType="student"
         focusScope="general"
       />
       <hr className="sidebar-line" />
       <SideFocusButton
         icon="assets/icons/book.svg"
-        focusName="Books"
+        displayName="Books"
+        itemType="book"
         focusScope="general"
       />
       <hr className="sidebar-line" />
       <SideFocusButton
         icon="assets/icons/code.svg"
-        focusName="Codes"
+        displayName="Codes"
+        itemType="code"
         focusScope="general"
       />
     </div>

@@ -1,42 +1,36 @@
-.focus-table {
-  border-collapse: collapse;
+.add-button-wrapper {
 
-  font-size: 2vh;
+  display: inline-block;
+  float: right;
+  padding-right: 5vh;
 
-  tbody, thead {
-    display: block;
-  }
+  .add-button {
+    height: 4vh;
+    width: 4vh;
+    border-radius: 100%;
+    background-color: #40a1ea;
 
-  td, th {
-    border-bottom: 1px solid #ddd;
-    padding: 2vh;
-    min-width: 25vh;
-    max-width: 25vh;
+    // Center text in the middle of the button
+    vertical-align: middle;
+    text-align: center;
+    padding: 0px;
     overflow: hidden;
-    text-overflow: ellipsis;
+
+    // Button press effect
+    transition: all 0.1s ease;
+
+
+    .text {
+      color: #FFFFFF;
+      font-size: 3.15vh;
+      pointer-events: none; // WARNING: May limit onClick events
+    }
+
   }
 
-  th {
-    padding-top: 2.4vh;
-    padding-bottom: 2vh;
-    text-align: left;
-  }
-
-  tbody {
-    height: 30vh;
-
-    overflow-x: hidden;
-    overflow-y: scroll;
-
-    tr:nth-child(odd){
-      background-color: #f9f9f9;
-    }
-    tr:nth-child(even){
-      background-color: #ffffff;
-    }
-
-    tr:hover {
-      background-color: #f2f2f2;
-    }
+  // Indicate the button is pressed
+  .pressed {
+    transition: all 0.1s ease;
+    transform: scale(0.9);
   }
 }

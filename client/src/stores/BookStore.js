@@ -14,12 +14,12 @@ var _books = [];
 readBooks(updateData);
 
 var BookStore = assign({}, EventEmitter.prototype, {
-  getBooks: function() {
+  getItems: function() {
     return _books;
   },
 
   // Returns book object if found, else, return null
-  getBook: function(id) {
+  getItem: function(id) {
     return _books.find(obj => {
       return obj._id === id;
     });
@@ -42,26 +42,23 @@ var BookStore = assign({}, EventEmitter.prototype, {
 BookStore.dispatchToken = AppDispatcher.register(function(action) {
   switch(action.type) {
     case BookActionTypes.CREATE_BOOK:
-      var data = action.data;
-      if ( data !== undefined ) {
-        createBook(data, updateData);
+      if ( action.data !== undefined ) {
+        createBook(action.data, updateData);
       }
     break;
     case BookActionTypes.READ_BOOKS:
       readBooks(updateData);
     break;
     case BookActionTypes.UPDATE_BOOK:
-      var id = action.id;
-      var data = action.data;
-      if ( id !== undefined && data !== undefined ) {
-        updateBook(id, data, updateData);
+      if ( action.id !== undefined &&
+           action.data !== undefined ) {
+        updateBook(action.id, action.data, updateData);
       }
     break;
     case BookActionTypes.DELETE_BOOK:
-      var id = action.id;
-      var data = action.data;
-      if ( id !== undefined && data !== undefined ) {
-        deleteBook(id, data, updateData);
+      if ( action.id !== undefined &&
+           action.data !== undefined ) {
+        deleteBook(action.id, action.data, updateData);
       }
     break;
     default:
@@ -78,12 +75,6 @@ function createBook(data, callback) {
 
 function readBooks(callback) {
   var url = SERVER_URL;
-
-  request.get(url, { json: true }, callback);
-}
-
-function readBook(id, callback) {
-  var url = SERVER_URL + `/${id}`;
 
   request.get(url, { json: true }, callback);
 }
