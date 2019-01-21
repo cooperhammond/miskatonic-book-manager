@@ -94,7 +94,7 @@ function createItem(itemType, data) {
   var url = SERVER_URL + `/${_itemTypeDomains[itemType]}/create`;
 
   request.post(url, { form: data }, function (err, res, body) {
-    updateData(err, res, body, itemType)
+    updateData(err, res, body, itemType, "post")
   });
 }
 
@@ -102,7 +102,7 @@ function readItems(itemType) {
   var url = SERVER_URL + `/${_itemTypeDomains[itemType]}`;
 
   request.get(url, { json: true }, function (err, res, body) {
-    updateData(err, res, body, itemType)
+    updateData(err, res, body, itemType, "get")
   });
 }
 
@@ -110,7 +110,7 @@ function updateItem(itemType, id, data) {
   var url = SERVER_URL + `/${_itemTypeDomains[itemType]}/${id}/update`;
 
   request.put(url, { form: data }, function (err, res, body) {
-    updateData(err, res, body, itemType)
+    updateData(err, res, body, itemType, "put")
   });
 }
 
@@ -118,24 +118,27 @@ function deleteItem(itemType, id) {
   var url = SERVER_URL + `/${_itemTypeDomains[itemType]}/${id}/delete`;
 
   request.delete(url, { json: true }, function (err, res, body) {
-    updateData(err, res, body, itemType)
+    updateData(err, res, body, itemType, "delete")
   });
 }
 
-function updateData(err, res, body, itemType) {
+function updateData(err, res, body, itemType, requestType) {
   if (err) {
     return console.log(err);
   }
 
-  body = sortData(_itemSortKeys[itemType], body);
-
-  _data[itemType] = body;
+  if (requestType === "get") {
+    body = sortData(_itemSortKeys[itemType], body);
+    _data[itemType] = body;
+  } else {
+    readItems(itemType);
+  }
 
   DataStore.emitChange();
 }
 
 function sortData(key, data) {
-  return data.sort(function(a, b) {
+  return [].slice.call(data).sort(function(a, b) {
     return keySort(key, a, b);
   });
 }

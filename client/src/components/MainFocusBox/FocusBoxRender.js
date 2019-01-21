@@ -1,7 +1,8 @@
 import React from 'react';
 
 import DataDisplayTable from '../DataDisplayTable/DataDisplayTable';
-import DataAddButton from '../DataAddButton/DataAddButton';
+import StandardButton from '../StandardButton/StandardButton';
+import PopupForm from '../PopupForm/PopupForm';
 
 import "./focusbox.scss";
 
@@ -12,9 +13,20 @@ export default function (props, state) {
 
       <div className='header'>{state.displayName}</div>
 
-      <DataAddButton itemType={state.itemType} />
+      <StandardButton
+        onClick={this.togglePopup}
+        icon="+"
+      />
 
       <DataDisplayTable labels={state.labels} rows={state.rows} />
+
+      {state.showPopup ?
+          <PopupForm
+            itemType={state.itemType}
+            closePopup={this.togglePopup.bind(this)}
+          />
+          : null
+      }
 
     </div>
   );

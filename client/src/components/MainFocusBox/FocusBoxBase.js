@@ -11,10 +11,12 @@ class FocusButton extends Component {
       displayName: null,
       itemType: null,
       labels: [],
-      rows: []
+      rows: [],
+      showPopup: false,
     };
 
     // Bind callback methods to make `this` the correct context.
+    this.togglePopup = this.togglePopup.bind(this);
     this._onChange = this._onChange.bind(this);
   }
 
@@ -27,6 +29,12 @@ class FocusButton extends Component {
   componentWillUnmount() {
     FocusStore.removeChangeListener(this._onChange);
     DataStore.addChangeListener(this._onChange);
+  }
+
+  togglePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
   }
 
   _onChange() {

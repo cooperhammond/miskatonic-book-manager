@@ -4,8 +4,44 @@
   overflow: hidden;
 
   .header {
-    display: inline-block;
+    float: left;
     font-size: 3.4vh;
     color: #9cb7cb;
+  }
+
+  .button-wrapper {
+
+    display: inline-block;
+    float: right;
+    margin-right: 2vh;
+
+    .button {
+      height: 4vh;
+      width: 4vh;
+      border-radius: 100%;
+      background-color: #40a1ea;
+
+      // Center text in the middle of the button
+      vertical-align: middle;
+      text-align: center;
+      padding: 0px;
+      overflow: hidden;
+
+      // Button press effect
+      transition: all 0.1s ease;
+
+      .icon {
+        color: #FFFFFF;
+        font-size: 3.15vh;
+        pointer-events: none; // WARNING: May limit onClick events
+      }
+
+    }
+
+    // Indicate the button is pressed
+    .pressed {
+      transition: all 0.1s ease;
+      transform: scale(0.9);
+    }
   }
 }
