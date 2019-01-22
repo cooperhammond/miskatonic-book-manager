@@ -47,11 +47,26 @@ class FocusButton extends Component {
     var rows = [];
 
     if (itemType === "student") {
-      labels = ["Name", "Email", "Codes"];
-      accessors = ["name", "email", "codes"];
+      labels = [
+        "Name",
+        "Email",
+        "Codes"
+      ];
+      accessors = [
+        (d) => `${d["lastName"]}, ${d["firstName"]}`,
+        "email",
+        "codes"];
     } else if (itemType === "book") {
-      labels = ["Title", "Codes", "Readers"];
-      accessors = ["title", "codes", "readers"];
+      labels = [
+        "Title",
+        "Codes",
+        "Readers"
+      ];
+      accessors = [
+        "title",
+        "codes",
+        "readers"
+      ];
     } else if (itemType === "code") {
       // TODO: figure out what to use for labels and accessors here
     }
@@ -63,17 +78,17 @@ class FocusButton extends Component {
         var rowData = [];
 
         for (var i = 0; i < accessors.length; i++) {
+          var element;
           var accessor = accessors[i];
 
           if (typeof accessor === "string") {
-            var element = datum[accessor];
-
-            // Check if it's accessing an object, and rather than returning the object,
-            // return the size of the object.
+            element = datum[accessor];
             if (typeof element === "object") {
               element = element.length;
             }
-
+            rowData.push(element);
+          } else if (typeof accessor === "function") {
+            element = accessor(datum);
             rowData.push(element);
           }
         }

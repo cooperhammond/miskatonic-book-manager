@@ -57,7 +57,7 @@ var studentForms = function (callback) {
       <label>
         Last Name:
         <input
-          dataset-key="lastName"
+          data-key="lastName"
           type="text"
           required={true}
           onChange={callback} />
@@ -67,7 +67,7 @@ var studentForms = function (callback) {
       <label>
         Email:
         <input
-          dataset-key="email"
+          data-key="email"
           type="email"
           required={true}
           onChange={callback} />
@@ -86,7 +86,7 @@ var bookForms = function (callback) {
       <label>
         Title:
         <input
-          dataset-key="title"
+          data-key="title"
           type="text"
           required={true}
           onChange={callback} />
@@ -96,7 +96,7 @@ var bookForms = function (callback) {
       <label>
         Author:
         <input
-          dataset-key="author"
+          data-key="author"
           type="text"
           required={true}
           onChange={callback} />

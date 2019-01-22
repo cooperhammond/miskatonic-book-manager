@@ -21,7 +21,6 @@ class PopupForm extends Component {
     var target = event.target;
     var value = target.value;
     var key = target.dataset.key;
-
     this.setState({
       data: update(this.state.data, {
         [key]: {$set: value}
