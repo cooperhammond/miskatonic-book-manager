@@ -24,7 +24,8 @@ export default function (props, state) {
 
         <StandardButton
           onClick={props.closePopup}
-          icon="x"
+          class="close-button"
+          icon=""
         />
 
         <form onSubmit={this.handleSubmit}>
@@ -45,7 +46,7 @@ var studentForms = function (callback) {
       <div>Add Student</div>
 
       <label>
-        First Name:
+        First Name
         <input
           data-key="firstName"
           type="text"
@@ -55,7 +56,7 @@ var studentForms = function (callback) {
 
       <br/>
       <label>
-        Last Name:
+        Last Name
         <input
           data-key="lastName"
           type="text"
@@ -65,7 +66,7 @@ var studentForms = function (callback) {
 
       <br/>
       <label>
-        Email:
+        Email
         <input
           data-key="email"
           type="email"

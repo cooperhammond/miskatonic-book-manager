@@ -2,14 +2,14 @@ import React from 'react';
 
 export default function (props, state) {
 
-  var classString = 'button';
+  var classString = props.class;
   if ( state.isPressed ) {
     classString += ' pressed';
   }
 
   return (
     <div>
-      <div className="button-wrapper" >
+      <div className={`${props.class}-wrapper`} >
         <div
           className={classString}
           onClick={props.onClick}

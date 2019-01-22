@@ -9,13 +9,14 @@
     color: #9cb7cb;
   }
 
-  .button-wrapper {
+  .add-button-wrapper {
 
     display: inline-block;
     float: right;
     margin-right: 2vh;
 
-    .button {
+    .add-button {
+      cursor: pointer;
       height: 4vh;
       width: 4vh;
       border-radius: 100%;

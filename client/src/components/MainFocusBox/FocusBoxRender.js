@@ -15,6 +15,7 @@ export default function (props, state) {
 
       <StandardButton
         onClick={this.togglePopup}
+        class="add-button"
         icon="+"
       />
 

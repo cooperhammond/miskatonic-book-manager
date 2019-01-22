@@ -22,32 +22,77 @@
     bottom: 25%;
     margin: auto;
 
-    .button-wrapper {
+    font-size: 3vh;
+
+    label {
+      font-size: 2vh;
+    }
+
+    input {
+      font-size: 1.5vh;
+    }
+
+    input[type=text], input[type=email] {
+      width: 100%;
+      padding: 1vh 1vh;
+      margin: .9vh 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type=submit] {
+      width: 100%;
+      background-color: #4a90e2;
+      color: white;
+      padding: 2vh 2.3vh;
+      margin: .9vh 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+
+    .close-button-wrapper {
 
       display: inline-block;
       float: right;
+      cursor: pointer;
 
-      .button {
-        height: 3vh;
+      .icon {
+        content: '';
+      }
+
+      .close-button:before {
+        font-weight: 300;
+        font-family: Arial, sans-serif;
+      }
+
+      .close-button {
+        position: absolute;
+        right: 3vh;
+        top: 2.2vh;
         width: 3vh;
-        border-radius: 100%;
-        background-color: #40a1ea;
-
-        // Center text in the middle of the button
-        vertical-align: middle;
-        text-align: center;
-        padding: 0px;
-        overflow: hidden;
-
-        // Button press effect
-        transition: all 0.1s ease;
-
-        .icon {
-          color: #FFFFFF;
-          font-size: 2.15vh;
-          pointer-events: none; // WARNING: May limit onClick events
-        }
-
+        height: 3vh;
+        opacity: 0.3;
+      }
+      .close-button:hover {
+        opacity: 1;
+      }
+      .close-button:before, .close-button:after {
+        position: absolute;
+        left: 1.5vh;
+        content: ' ';
+        height: 3.5vh;
+        width: .22vh;
+        background-color: #333;
+      }
+      .close-button:before {
+        transform: rotate(45deg);
+      }
+      .close-button:after {
+        transform: rotate(-45deg);
       }
 
       // Indicate the button is pressed
