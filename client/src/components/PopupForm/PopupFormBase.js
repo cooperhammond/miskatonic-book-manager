@@ -17,9 +17,10 @@ class PopupForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event, key) {
+  handleChange(event) {
     var target = event.target;
     var value = target.value;
+    var key = target.dataset.key;
 
     this.setState({
       data: update(this.state.data, {

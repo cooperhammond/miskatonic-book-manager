@@ -47,27 +47,30 @@ var studentForms = function (callback) {
       <label>
         First Name:
         <input
+          data-key="firstName"
           type="text"
           required={true}
-          onChange={(e) => callback(e, "firstName")} />
+          onChange={callback} />
       </label>
 
       <br/>
       <label>
         Last Name:
         <input
+          dataset-key="lastName"
           type="text"
           required={true}
-          onChange={(e) => callback(e, "lastName")} />
+          onChange={callback} />
       </label>
 
       <br/>
       <label>
         Email:
         <input
+          dataset-key="email"
           type="email"
           required={true}
-          onChange={(e) => callback(e, "email")} />
+          onChange={callback} />
       </label>
 
     </div>
@@ -83,18 +86,20 @@ var bookForms = function (callback) {
       <label>
         Title:
         <input
+          dataset-key="title"
           type="text"
           required={true}
-          onChange={(e) => callback(e, "title")} />
+          onChange={callback} />
       </label>
 
       <br/>
       <label>
         Author:
         <input
+          dataset-key="author"
           type="text"
           required={true}
-          onChange={(e) => callback(e, "author")} />
+          onChange={callback} />
       </label>
 
     </div>
