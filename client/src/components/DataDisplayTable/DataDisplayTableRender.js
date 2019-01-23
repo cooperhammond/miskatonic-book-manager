@@ -10,9 +10,9 @@ export default function (props, state) {
 
   var rows = props.rows.map(function (row, index) {
     return (
-      <tr key={row + index}>
+      <tr data-index={index} key={row + index} onClick={props.onClick}>
         {row.map(function (element, index_) {
-          return <td key={element + index_}>{element}</td>;
+          return <td data-index={index} key={element + index_}>{element}</td>;
         })}
       </tr>
     )

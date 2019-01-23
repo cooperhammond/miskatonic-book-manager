@@ -10,22 +10,22 @@ var CHANGE_EVENT = 'change';
 
 var _itemTypes = {
   student: "student",
-  book:    "book",
-  code:    "code"
+  book   : "book",
+  code   : "code"
 }
 
 var _scopes = {
   general: "general",
   student: "student",
-  book:    "book",
-  code:    "code"
+  book   : "book",
+  code   : "code"
 }
 
 // `itemType`: `displayTitle`
 var _generalDisplayTitles = {
   student: "STUDENTS",
-  book:    "BOOKS",
-  code:    "CODES"
+  book   : "BOOKS",
+  code   : "CODES"
 }
 
 // default:
@@ -34,7 +34,7 @@ var _generalDisplayTitles = {
 var _scope = _scopes.general;
 var _itemType = _itemTypes.student;
 
-var _focusItem;
+var _focusItem = null;
 var _displayTitle = updateDisplayTitle();
 
 
@@ -86,12 +86,16 @@ export default FocusStore;
 //   newScope    : scope,
 //   newItemType : itemType,
 //   itemId      : itemId  (only if the scope is not general)
+//   itemIndex   : itemIndex (only if the scope is not general)
 // }
 function changeView (args) {
 
   var newScope    = args.newScope;
   var newItemType = args.newItemType;
   var itemId      = args.itemId;
+  var itemIndex   = args.itemIndex
+
+  console.log(args);
 
   if (Object.values(_scopes).includes(newScope)) {
     _scope = newScope;
@@ -102,7 +106,9 @@ function changeView (args) {
   }
 
   if (itemId) {
-    _focusItem = DataStore.getItem(_itemType, itemId);
+    _focusItem = DataStore.getItemById(_itemType, itemId);
+  } else if (itemIndex) {
+    _focusItem = DataStore.getItemByIndex(_itemType, itemIndex);
   }
 
   updateDisplayTitle();

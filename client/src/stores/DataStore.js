@@ -37,10 +37,14 @@ let DataStore = assign({}, EventEmitter.prototype, {
   },
 
   // Returns code object if found, else, return null
-  getItem: function(itemType, id) {
+  getItemById: function(itemType, id) {
     return _data[itemType].find(obj => {
       return obj._id === id;
     });
+  },
+
+  getItemByIndex: function(itemType, index) {
+    return _data[itemType][index];
   },
 
   emitChange: function() {

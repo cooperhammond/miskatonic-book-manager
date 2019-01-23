@@ -19,7 +19,11 @@ export default function (props, state) {
         icon="+"
       />
 
-      <DataDisplayTable labels={state.labels} rows={state.rows} />
+      <DataDisplayTable
+        labels={state.labels}
+        rows={state.rows}
+        onClick={this.onItemClick}
+      />
 
       {state.showPopup ?
           <PopupForm
