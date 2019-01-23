@@ -1,7 +1,11 @@
 .focusbox {
   width: auto;
+  height: auto;
   padding: 1%;
   overflow: hidden;
+
+  // Change content size
+  transition: all 0.5s ease;
 
   .header {
     float: left;
