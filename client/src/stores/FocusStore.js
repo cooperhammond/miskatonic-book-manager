@@ -52,6 +52,10 @@ let FocusStore = assign({}, EventEmitter.prototype, {
     return _itemType;
   },
 
+  getFocusItem: function() {
+    return _focusItem;
+  },
+
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },

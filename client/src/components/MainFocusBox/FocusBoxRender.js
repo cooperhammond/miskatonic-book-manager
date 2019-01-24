@@ -9,7 +9,7 @@ import "./focusbox.scss";
 export default function (props, state) {
 
   return (
-    <div className='focusbox floating'>
+    <div className="focusbox floating">
 
       <div className='header'>{state.displayName}</div>
 
@@ -19,18 +19,14 @@ export default function (props, state) {
         icon="+"
       />
 
-      <DataDisplayTable
-        labels={state.labels}
-        rows={state.rows}
-        onClick={this.onItemClick}
-      />
+      <DataDisplayTable />
 
       {state.showPopup ?
-          <PopupForm
-            itemType={state.itemType}
-            closePopup={this.togglePopup.bind(this)}
-          />
-          : null
+        <PopupForm
+          itemType={state.itemType}
+          closePopup={this.togglePopup.bind(this)}
+        />
+        : null
       }
 
     </div>
