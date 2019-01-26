@@ -1,7 +1,5 @@
 import { Component } from 'react';
 
-import FocusActions from '../../actions/FocusActions'
-
 import FocusStore from '../../stores/FocusStore';
 import DataStore from '../../stores/DataStore';
 
@@ -15,7 +13,6 @@ class DataDisplayTable extends Component {
     };
 
     // Bind callback methods to make `this` the correct context.
-    this.onItemClick = this.onItemClick.bind(this);
     this._onChange = this._onChange.bind(this);
   }
 
@@ -28,19 +25,6 @@ class DataDisplayTable extends Component {
   componentWillUnmount() {
     FocusStore.removeChangeListener(this._onChange);
     DataStore.removeChangeListener(this._onChange);
-  }
-
-  onItemClick (event) {
-    var target = event.target;
-    var index = target.dataset.index;
-    var newScope = FocusStore.getItemType();
-
-    // Switch to a specific view of the item itself
-    FocusActions.changeView({
-      newScope : newScope,
-      itemType : FocusStore.getItemType(),
-      itemIndex: index,
-    });
   }
 
   _onChange() {
@@ -79,6 +63,25 @@ class DataDisplayTable extends Component {
           "readers"
         ];
       } else if (itemType === "code") {
+        labels = [
+          "Book",
+          "Code",
+          "User"
+        ];
+        accessors = [
+          (d) => {
+            var book = DataStore.getItemById("book", d.book);
+            return book.title;
+          },
+          "code",
+          (d) => {
+            if (d.student) {
+              var student = DataStore.getItemById("student", d.student);
+              return `${student.lastName}, ${student.firstName}`;
+            }
+            return "None";
+          }
+        ]
         // TODO: figure out what to use for labels and accessors here
       }
 
@@ -112,7 +115,7 @@ class DataDisplayTable extends Component {
       }
     }
 
-    if (rawData) {
+    if (rawData && labels !== [] && accessors !== []) {
       // Map the data from raw server info to elements
       for (var datum_i = 0; datum_i < rawData.length; datum_i++) {
         var datum = rawData[datum_i];

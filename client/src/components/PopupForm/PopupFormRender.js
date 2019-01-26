@@ -3,6 +3,9 @@ import React from 'react';
 import "./popupform.scss";
 
 import StandardButton from '../StandardButton/StandardButton';
+import studentForm from '../forms/StudentForm';
+import bookForm from '../forms/BookForm';
+import codeForm from '../forms/BookForm';
 
 export default function (props, state) {
 
@@ -11,11 +14,11 @@ export default function (props, state) {
   var inputForms;
 
   if (itemType === "student") {
-    inputForms = studentForms(this.handleChange);
+    inputForms = studentForm(this.handleChange);
   } else if (itemType === "book") {
-    inputForms = bookForms(this.handleChange);
+    inputForms = bookForm(this.handleChange);
   } else if (itemType === "code") {
-    inputForms = codeForms(this.handleChange);
+    inputForms = codeForm(this.handleChange);
   }
 
   return (
@@ -23,7 +26,7 @@ export default function (props, state) {
       <div className="popup-form">
 
         <StandardButton
-          onClick={props.closePopup}
+          onClick={this.closeSelf}
           class="close-button"
           icon=""
         />
@@ -37,76 +40,4 @@ export default function (props, state) {
       </div>
     </div>
   );
-}
-
-var studentForms = function (callback) {
-  return (
-    <div>
-
-      <div>Add Student</div>
-
-      <label>
-        First Name
-        <input
-          data-key="firstName"
-          type="text"
-          required={true}
-          onChange={callback} />
-      </label>
-
-      <br/>
-      <label>
-        Last Name
-        <input
-          data-key="lastName"
-          type="text"
-          required={true}
-          onChange={callback} />
-      </label>
-
-      <br/>
-      <label>
-        Email
-        <input
-          data-key="email"
-          type="email"
-          required={true}
-          onChange={callback} />
-      </label>
-
-    </div>
-  )
-}
-
-var bookForms = function (callback) {
-  return (
-    <div>
-
-      <div>Add Book</div>
-
-      <label>
-        Title:
-        <input
-          data-key="title"
-          type="text"
-          required={true}
-          onChange={callback} />
-      </label>
-
-      <br/>
-      <label>
-        Author:
-        <input
-          data-key="author"
-          type="text"
-          required={true}
-          onChange={callback} />
-      </label>
-
-    </div>
-  )
-}
-
-var codeForms = function () {
-
 }

@@ -10,9 +10,9 @@ var CHANGE_EVENT = 'change';
 var SERVER_URL = "http://localhost:3200";
 
 var _data = {
-  students: [],
-  books: [],
-  codes: [],
+  student: [],
+  book: [],
+  code: [],
 };
 
 var _itemTypeDomains = {

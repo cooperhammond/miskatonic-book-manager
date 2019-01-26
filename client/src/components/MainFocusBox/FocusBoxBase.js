@@ -10,6 +10,7 @@ class FocusBox extends Component {
     super(props);
     this.state = {
       displayName: null,
+      itemType: null,
       showPopup: false,
     };
 
@@ -28,12 +29,6 @@ class FocusBox extends Component {
     FocusStore.removeChangeListener(this._onChange);
   }
 
-  togglePopup() {
-    this.setState({
-      showPopup: !this.state.showPopup
-    });
-  }
-
   onItemClick (event) {
     var target = event.target;
     var index = target.dataset.index;
@@ -42,15 +37,24 @@ class FocusBox extends Component {
     // Switch to a specific view of the item itself
     FocusActions.changeView({
       newScope : newScope,
+      itemType : FocusStore.getItemType(),
       itemIndex: index,
     });
   }
 
   _onChange() {
     var displayName = FocusStore.getDisplayTitle();
+    var itemType = FocusStore.getItemType();
 
     this.setState({
       displayName: displayName,
+      itemType: itemType
+    });
+  }
+
+  togglePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
     });
   }
 }

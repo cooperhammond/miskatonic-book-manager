@@ -3,7 +3,8 @@ const Code = require('../models/CodeModel');
 exports.create = function (req, res) {
   let code = new Code(
     {
-      book: req.body.book
+      book: req.body.book,
+      student: req.body.student ? req.body.student : null
     }
   );
 

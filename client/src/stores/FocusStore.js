@@ -99,8 +99,6 @@ function changeView (args) {
   var itemId      = args.itemId;
   var itemIndex   = args.itemIndex
 
-  console.log(args);
-
   if (Object.values(_scopes).includes(newScope)) {
     _scope = newScope;
   }

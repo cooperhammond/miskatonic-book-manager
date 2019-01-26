@@ -7,6 +7,10 @@
     display: block;
   }
 
+  td {
+    cursor: pointer;
+  }
+
   td, th {
     border-bottom: 1px solid #ddd;
     padding: 2vh;

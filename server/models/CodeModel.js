@@ -23,7 +23,7 @@ const codeSchema = new Schema(
       ref: 'Book',
       required: true,
     },
-    user: {
+    student: {
       type: ObjectId,
       ref: 'Student',
       default: null,
