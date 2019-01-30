@@ -1,33 +1,29 @@
 import React from 'react';
 
-import DataDisplayTable from '../DataDisplayTable/DataDisplayTable';
-import StandardButton from '../StandardButton/StandardButton';
-import PopupForm from '../PopupForm/PopupForm';
+import generalDisplay from './displays/generalDisplay';
+import studentDisplay from './displays/studentDisplay';
 
 import "./focusbox.scss";
+import './displays/displaystyles.scss';
 
 export default function (props, state) {
+
+  var display;
+
+  if (state.focusScope === "student") {
+    display = studentDisplay(this, props, state);
+  } else if (state.focusScope === "book") {
+
+  } else if (state.focusScope === "code") {
+
+  } else {
+    display = generalDisplay(this, props, state);
+  }
 
   return (
     <div className="focusbox floating">
 
-      <div className='header'>{state.displayName}</div>
-
-      <StandardButton
-        onClick={this.togglePopup}
-        class="add-button"
-        icon="+"
-      />
-
-      <DataDisplayTable onItemClick={this.onItemClick} />
-
-      {state.showPopup ?
-        <PopupForm
-          itemType={state.itemType}
-          closePopup={this.togglePopup.bind(this)}
-        />
-        : null
-      }
+      {display}
 
     </div>
   );

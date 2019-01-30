@@ -44,7 +44,7 @@ class DataDisplayTable extends Component {
         labels = [
           "Name",
           "Email",
-          "Codes"
+          "Books"
         ];
         accessors = [
           (d) => `${d["lastName"]}, ${d["firstName"]}`,

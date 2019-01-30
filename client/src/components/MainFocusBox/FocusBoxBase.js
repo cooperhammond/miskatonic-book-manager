@@ -44,10 +44,12 @@ class FocusBox extends Component {
 
   _onChange() {
     var displayName = FocusStore.getDisplayTitle();
+    var focusScope = FocusStore.getFocusScope();
     var itemType = FocusStore.getItemType();
 
     this.setState({
       displayName: displayName,
+      focusScope: focusScope,
       itemType: itemType
     });
   }

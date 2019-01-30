@@ -1,24 +1,33 @@
 import React from 'react';
 
-import "./popupform.scss";
+import "./Popup.scss";
 
 import StandardButton from '../StandardButton/StandardButton';
-import studentForm from './forms/studentForm';
-import bookForm from './forms/bookForm';
-import codeForm from './forms/bookForm';
+import StudentForm from './forms/StudentForm';
+import BookForm from './forms/BookForm';
+import CodeForm from './forms/CodeForm';
 
 export default function (props, state) {
 
-  var itemType = props.itemType;
 
+  var itemType = props.itemType;
+  var scope = state.scope;
+
+  var submit;
   var inputForms;
 
+  if (scope === "general") {
+    submit = this.handleCreate;
+  } else {
+    submit = this.handleUpdate;
+  }
+
   if (itemType === "student") {
-    inputForms = studentForm(this.handleChange);
+    inputForms = StudentForm.call(this.handleValueChange, props.focusItem);
   } else if (itemType === "book") {
-    inputForms = bookForm(this.handleChange);
+    inputForms = BookForm.call(this.handleValueChange, props.focusItem);
   } else if (itemType === "code") {
-    inputForms = codeForm(this.handleChange);
+    inputForms = CodeForm.call(this.handleValueChange, props.focusItem);
   }
 
   return (
@@ -31,7 +40,7 @@ export default function (props, state) {
           icon=""
         />
 
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={submit}>
           {inputForms}
 
           <input type="submit" value="Submit" />

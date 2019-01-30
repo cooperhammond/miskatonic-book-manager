@@ -1,6 +1,8 @@
-import DataStore from '../../stores/DataStore';
+import React from 'react';
 
-export default function (callback) {
+import DataStore from '../../../stores/DataStore';
+
+export default function (callback, focusItem) {
 
   var books = DataStore.getItems("book").map(function (book, index) {
     return (

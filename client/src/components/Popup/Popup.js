@@ -1,26 +1,30 @@
 import { Component } from 'react';
 
+import Render from './PopupRender';
+
 import update from 'immutability-helper';
 
 import DataActions from '../../actions/DataActions';
-import DataStore from '../../stores/DataStore';
+import FocusStore from '../../stores/FocusStore';
 
 class PopupForm extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      scope: null,
       data: {},
     };
 
     // Bind callback methods to make `this` the correct context.
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleValueChange = this.handleValueChange.bind(this);
+    this.handleCreate = this.handleCreate.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
     this.closeSelf = this.closeSelf.bind(this);
     this.escFunction = this.escFunction.bind(this);
   }
 
-  handleChange(event) {
+  handleValueChange(event) {
     var target = event.target;
     var value = target.value;
     var key = target.dataset.key;
@@ -34,11 +38,21 @@ class PopupForm extends Component {
     }
   }
 
-  handleSubmit(event) {
+  handleCreate(event) {
     event.preventDefault(); // prevent reload
 
     if (this.state.data !== {}) {
       DataActions.createItem(this.props.itemType, this.state.data);
+      this.closeSelf();
+    }
+  }
+
+  handleUpdate(event) {
+    event.preventDefault();
+
+    if (this.state.data !== {}) {
+      DataActions.updateItem(this.props.itemType, this.props.itemId,
+        this.state.data);
       this.closeSelf();
     }
   }
@@ -57,15 +71,22 @@ class PopupForm extends Component {
   componentDidMount(){
     document.addEventListener("keydown", this.escFunction, false);
 
-    if (this.props.itemType === "code") {
-      this.setState({
-        data: { book: DataStore.getItems("book")[0]._id },
-      });
-    }
+    var scope = FocusStore.getFocusScope();
+
+    this.setState({
+      scope: scope,
+    });
+
+    // TODO: set preset data according to itemtype
+    //  data: { book: DataStore.getItems("book")[0]._id },
   }
 
   componentWillUnmount(){
     document.removeEventListener("keydown", this.escFunction, false);
+  }
+
+  render () {
+    return Render.call(this, this.props, this.state);
   }
 }
 
