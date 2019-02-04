@@ -35,6 +35,7 @@ var _scope = _scopes.general;
 var _itemType = _itemTypes.student;
 
 var _focusItem = null;
+var _showPopup = false;
 var _pastFocusItems = [];
 var _displayTitle = updateDisplayTitle();
 
@@ -61,6 +62,10 @@ let FocusStore = assign({}, EventEmitter.prototype, {
     return _pastFocusItems[index];
   },
 
+  showPopup: function() {
+    return _showPopup;
+  },
+
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },
@@ -83,6 +88,14 @@ FocusStore.dispatchToken = AppDispatcher.register(function(action) {
         changeView(args);
         FocusStore.emitChange();
       }
+    break;
+    case FocusActionTypes.POPUP_CLOSED:
+      _showPopup = false;
+      FocusStore.emitChange();
+    break;
+    case FocusActionTypes.POPUP_OPENED:
+      _showPopup = true;
+      FocusStore.emitChange();
     break;
     default:
   }

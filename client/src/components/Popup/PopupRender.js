@@ -22,11 +22,11 @@ export default function (props, state) {
   }
 
   if (itemType === "student") {
-    inputForms = StudentForm(this.handleValueChange, state.focusItem);
+    inputForms = StudentForm.call(this.handleValueChange, state.focusItem);
   } else if (itemType === "book") {
-    inputForms = BookForm(this.handleValueChange, state.focusItem);
+    inputForms = BookForm.call(this.handleValueChange, state.focusItem);
   } else if (itemType === "code") {
-    inputForms = CodeForm(this.handleValueChange, state.focusItem);
+    inputForms = CodeForm.call(this.handleValueChange, state.focusItem);
   }
 
   return (

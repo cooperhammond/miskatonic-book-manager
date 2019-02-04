@@ -3,7 +3,6 @@ import Render from './FocusBoxRender';
 import { Component } from 'react';
 
 import FocusActions from '../../actions/FocusActions'
-
 import FocusStore from '../../stores/FocusStore';
 
 class FocusBox extends Component {
@@ -12,23 +11,11 @@ class FocusBox extends Component {
     super(props);
     this.state = {
       displayName: null,
-      itemType: null,
-      showPopup: false,
     };
 
     // Bind callback methods to make `this` the correct context.
-    this.togglePopup = this.togglePopup.bind(this);
     this.onItemClick = this.onItemClick.bind(this);
     this._onChange = this._onChange.bind(this);
-  }
-
-  componentDidMount() {
-    FocusStore.addChangeListener(this._onChange);
-    this._onChange();
-  }
-
-  componentWillUnmount() {
-    FocusStore.removeChangeListener(this._onChange);
   }
 
   onItemClick (event) {
@@ -46,18 +33,19 @@ class FocusBox extends Component {
 
   _onChange() {
     var displayName = FocusStore.getDisplayTitle();
-    var focusScope = FocusStore.getFocusScope();
 
     this.setState({
       displayName: displayName,
-      focusScope: focusScope,
     });
   }
 
-  togglePopup() {
-    this.setState({
-      showPopup: !this.state.showPopup
-    });
+  componentDidMount() {
+    FocusStore.addChangeListener(this._onChange);
+    this._onChange();
+  }
+
+  componentWillUnmount() {
+    FocusStore.removeChangeListener(this._onChange);
   }
 
   render () {

@@ -2,7 +2,8 @@ import React from 'react';
 
 import DataDisplayTable from '../../DataDisplayTable/DataDisplayTable';
 import StandardButton from '../../StandardButton/StandardButton';
-import Popup from '../../Popup/Popup';
+
+import FocusActions from '../../../actions/FocusActions'
 
 export default function (functions, props, state) {
   return (
@@ -11,21 +12,13 @@ export default function (functions, props, state) {
       <div className='header'>{state.displayName}</div>
 
       <StandardButton
-        onClick={functions.togglePopup}
+        onClick={FocusActions.openPopup}
         class="add-book"
         icon="Give Book"
       />
 
-
       <div className='table-label'>Books</div>
       <DataDisplayTable onItemClick={functions.onItemClick} />
-
-      {state.showPopup ?
-        <Popup
-          closePopup={functions.togglePopup.bind(functions)}
-        />
-        : null
-      }
 
     </div>
   )

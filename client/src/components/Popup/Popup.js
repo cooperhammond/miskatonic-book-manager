@@ -5,6 +5,7 @@ import Render from './PopupRender';
 import update from 'immutability-helper';
 
 import DataActions from '../../actions/DataActions';
+import FocusActions from '../../actions/FocusActions';
 import FocusStore from '../../stores/FocusStore';
 import DataStore from '../../stores/DataStore';
 
@@ -60,7 +61,7 @@ class PopupForm extends Component {
 
   closeSelf() {
     this.setState({ data: {} });
-    this.props.closePopup();
+    FocusActions.closePopup();
   }
 
   escFunction(event){

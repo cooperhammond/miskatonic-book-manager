@@ -9,6 +9,16 @@ var FocusActions = {
       args: args,
     });
   },
+  closePopup: function() {
+    AppDispatcher.dispatch({
+      type: FocusActionTypes.POPUP_CLOSED,
+    });
+  },
+  openPopup: function() {
+    AppDispatcher.dispatch({
+      type: FocusActionTypes.POPUP_OPENED,
+    });
+  }
 };
 
 export default FocusActions;

@@ -68,4 +68,6 @@ exports.delete = function (req, res) {
       });
     }
   });
+  // TODO: make it so that when a code is deleted, it is removed from
+  // the associated student's inventory
 }
