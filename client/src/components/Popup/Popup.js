@@ -16,6 +16,7 @@ class PopupForm extends Component {
     this.state = {
       scope: null,
       data: {},
+      focusItem: null,
     };
 
     // Bind callback methods to make `this` the correct context.
@@ -59,11 +60,13 @@ class PopupForm extends Component {
     }
   }
 
+  // reset data and close
   closeSelf() {
     this.setState({ data: {} });
     FocusActions.closePopup();
   }
 
+  // Press escape to close the popup window
   escFunction(event){
     if(event.keyCode === 27) {
       this.closeSelf();
@@ -73,6 +76,8 @@ class PopupForm extends Component {
   componentDidMount(){
     document.addEventListener("keydown", this.escFunction, false);
 
+
+    // To provide default data for the dropdown menus
     var scope = FocusStore.getFocusScope();
     var itemType = FocusStore.getItemType();
     var defaultItemData = {};

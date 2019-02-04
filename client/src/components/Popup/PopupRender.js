@@ -21,12 +21,13 @@ export default function (props, state) {
     submit = this.handleUpdate;
   }
 
+  // Do not use .call on these methods
   if (itemType === "student") {
-    inputForms = StudentForm.call(this.handleValueChange, state.focusItem);
+    inputForms = StudentForm(this.handleValueChange, state.focusItem);
   } else if (itemType === "book") {
-    inputForms = BookForm.call(this.handleValueChange, state.focusItem);
+    inputForms = BookForm(this.handleValueChange, state.focusItem);
   } else if (itemType === "code") {
-    inputForms = CodeForm.call(this.handleValueChange, state.focusItem);
+    inputForms = CodeForm(this.handleValueChange, state.focusItem);
   }
 
   return (

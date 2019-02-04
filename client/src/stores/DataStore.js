@@ -31,14 +31,14 @@ var _itemSortKeys = {
   student: "lastName",
   book: "title",
   code: (c) => {
-    var book = DataStore.getItemById("book", c.book);
-    if (book) { return book.title }
+    var book = DataStore.getItemById(_itemTypes.book, c.book);
+    if (book) { return book.title; }
   }
 }
 
-readItems("student");
-readItems("book");
-readItems("code");
+readItems(_itemTypes.student);
+readItems(_itemTypes.book);
+readItems(_itemTypes.code);
 
 let DataStore = assign({}, EventEmitter.prototype, {
   getItems: function(itemType) {
@@ -113,7 +113,7 @@ function createItem(itemType, data) {
   }
 
   request.post(url, { form: data }, function (err, res, body) {
-    updateData(err, res, body, req)
+    changeData(err, res, body, req)
   });
 }
 
@@ -126,7 +126,7 @@ function readItems(itemType) {
   }
 
   request.get(url, { json: true }, function (err, res, body) {
-    updateData(err, res, body, req)
+    changeData(err, res, body, req)
   });
 }
 
@@ -143,7 +143,7 @@ function updateItem(itemType, id, data) {
   console.log(req);
 
   request.put(url, { form: data }, function (err, res, body) {
-    updateData(err, res, body, req);
+    changeData(err, res, body, req);
   });
 }
 
@@ -157,11 +157,11 @@ function deleteItem(itemType, id) {
   }
 
   request.delete(url, { json: true }, function (err, res, body) {
-    updateData(err, res, body, req);
+    changeData(err, res, body, req);
   });
 }
 
-function updateData(err, res, body, req) {
+function changeData(err, res, body, req) {
   if (err) {
     return console.log(err);
   }
@@ -169,7 +169,7 @@ function updateData(err, res, body, req) {
   var itemType = req.itemType;
   var requestType = req.requestType;
 
-  if (requestType === "post") {
+  if (requestType === "post") { // Update
 
     if (itemType === _itemTypes.code) {
       if (typeof req.data.student === "string") {
@@ -180,13 +180,14 @@ function updateData(err, res, body, req) {
       }
     }
 
-  } else if (requestType === "put") {
+  } else if (requestType === "put") { // Create
 
 
     if (itemType === _itemTypes.code) {
       var oldCode = DataStore.getItemById(_itemTypes.code, req.id);
 
       // Check that there was a student and now there isn't
+      // and then remove the code in the associated students inventory
       if (oldCode.student != null && req.data.student == null) {
         updateItem(_itemTypes.student, req.data.student, {
           removeCode: oldCode.student
@@ -196,10 +197,12 @@ function updateData(err, res, body, req) {
 
   }
 
-  if (requestType === "get") {
-    body = sortData(_itemSortKeys[itemType], body);
-    _data[itemType] = body;
+  if (requestType === "get") { // Read
+    body = sortData(_itemSortKeys[itemType], body); // Sort the data
+    _data[itemType] = body; // Update the data in corresponding key
   } else {
+    // Otherwise, an item had been created, updated, or deleted, so
+    // update our cache
     readItems(itemType);
   }
 
