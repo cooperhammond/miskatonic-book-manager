@@ -14,7 +14,8 @@ exports.create = function (req, res) {
       console.error(err); // There's an error! Alert us!
     } else {
       res.send({
-        message: 'Code created successfully!'
+        message: "Code created successfully!",
+        id: code.id,
       });
     }
   })

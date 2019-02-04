@@ -22,7 +22,6 @@ export default function (functions, props, state) {
 
       {state.showPopup ?
         <Popup
-          itemType={state.itemType}
           closePopup={functions.togglePopup.bind(functions)}
         />
         : null

@@ -15,6 +15,12 @@ var _data = {
   code: [],
 };
 
+var _itemTypes = {
+  student: "student",
+  book   : "book",
+  code   : "code"
+}
+
 var _itemTypeDomains = {
   student: "students",
   book: "books",
@@ -24,7 +30,10 @@ var _itemTypeDomains = {
 var _itemSortKeys = {
   student: "lastName",
   book: "title",
-  code: "code"
+  code: (c) => {
+    var book = DataStore.getItemById("book", c.book);
+    if (book) { return book.title }
+  }
 }
 
 readItems("student");
@@ -97,38 +106,94 @@ export default DataStore;
 function createItem(itemType, data) {
   var url = SERVER_URL + `/${_itemTypeDomains[itemType]}/create`;
 
+  var req = {
+    requestType: "post",
+    itemType: itemType,
+    data: data
+  }
+
   request.post(url, { form: data }, function (err, res, body) {
-    updateData(err, res, body, itemType, "post")
+    updateData(err, res, body, req)
   });
 }
 
 function readItems(itemType) {
   var url = SERVER_URL + `/${_itemTypeDomains[itemType]}`;
 
+  var req = {
+    requestType: "get",
+    itemType: itemType,
+  }
+
   request.get(url, { json: true }, function (err, res, body) {
-    updateData(err, res, body, itemType, "get")
+    updateData(err, res, body, req)
   });
 }
 
 function updateItem(itemType, id, data) {
   var url = SERVER_URL + `/${_itemTypeDomains[itemType]}/${id}/update`;
 
+  var req = {
+    requestType: "put",
+    itemType: itemType,
+    id: id,
+    data: data
+  }
+
+  console.log(req);
+
   request.put(url, { form: data }, function (err, res, body) {
-    updateData(err, res, body, itemType, "put")
+    updateData(err, res, body, req);
   });
 }
 
 function deleteItem(itemType, id) {
   var url = SERVER_URL + `/${_itemTypeDomains[itemType]}/${id}/delete`;
 
+  var req = {
+    requestType: "delete",
+    itemType: itemType,
+    id: id,
+  }
+
   request.delete(url, { json: true }, function (err, res, body) {
-    updateData(err, res, body, itemType, "delete")
+    updateData(err, res, body, req);
   });
 }
 
-function updateData(err, res, body, itemType, requestType) {
+function updateData(err, res, body, req) {
   if (err) {
     return console.log(err);
+  }
+
+  var itemType = req.itemType;
+  var requestType = req.requestType;
+
+  if (requestType === "post") {
+
+    if (itemType === _itemTypes.code) {
+      if (typeof req.data.student === "string") {
+        console.log(body);
+        updateItem(_itemTypes.student, req.data.student, {
+          addCode: JSON.parse(body).id,
+        });
+      }
+    }
+
+  } else if (requestType === "put") {
+
+
+    if (itemType === _itemTypes.code) {
+      var oldCode = DataStore.getItemById(_itemTypes.code, req.id);
+
+      // Check that there was a student and now there isn't
+      if (oldCode.student != null && req.data.student == null) {
+        updateItem(_itemTypes.student, req.data.student, {
+          removeCode: oldCode.student
+        })
+      }
+    }
+
   }
 
   if (requestType === "get") {
@@ -143,12 +208,22 @@ function updateData(err, res, body, itemType, requestType) {
 
 function sortData(key, data) {
   return [].slice.call(data).sort(function(a, b) {
-    return keySort(key, a, b);
+    if (typeof key === "function") {
+      return funcSort(key, a, b);
+    } else {
+      return keySort(key, a, b);
+    }
   });
 }
 
 function keySort(key, a, b) {
-  if(a[key] < b[key]) { return -1; }
-  if(a[key] > b[key]) { return 1; }
+  if (a[key] < b[key]) { return -1; }
+  if (a[key] > b[key]) { return 1; }
+  return 0;
+}
+
+function funcSort(func, a, b) {
+  if (func(a) < func(b)) { return -1; }
+  if (func(a) > func(b)) {return 1; }
   return 0;
 }

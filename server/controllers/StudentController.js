@@ -1,4 +1,5 @@
 const Student = require('../models/StudentModel');
+const mongoose = require("mongoose");
 
 exports.create = function (req, res) {
   let student = new Student(
@@ -15,7 +16,8 @@ exports.create = function (req, res) {
       console.error(err); // There's an error! Alert us!
     } else {
       res.send({
-        message: 'Student created successfully!'
+        message: 'Student created successfully!',
+        id: student.id
       });
     }
   })
@@ -44,7 +46,39 @@ exports.readSingle = function (req, res) {
 }
 
 exports.update = function (req, res) {
-  Student.findByIdAndUpdate(req.params.id, {$set: req.body},
+  var body = req.body;
+
+  console.log(body);
+
+  if (body.addCode) {
+    Student.findByIdAndUpdate(req.params.id,
+      { $push: { "codes": mongoose.Types.ObjectId(body.addCode) } },
+      {safe: true, upsert: true},
+      function (err, student) {
+        if (err) {
+          res.send(err);      // There's an error! Alert the client!
+          console.error(err); // There's an error! Alert us!
+        }
+      },
+    );
+  } else if (body.removeCode) {
+    Student.findByIdAndUpdate(req.params.id,
+      { $pull: { codes: body.removeCode }},
+      {safe: true, upsert: true},
+      function (err, student) {
+        if (err) {
+          res.send(err);      // There's an error! Alert the client!
+          console.error(err); // There's an error! Alert us!
+        }
+      },
+    );
+  }
+
+  delete body["addCode"];
+  delete body["removeCode"];
+
+
+  Student.findByIdAndUpdate(req.params.id, {$set: body},
     function (err, student) {
       if (err) {
         res.send(err);      // There's an error! Alert the client!

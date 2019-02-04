@@ -9,8 +9,7 @@ import CodeForm from './forms/CodeForm';
 
 export default function (props, state) {
 
-
-  var itemType = props.itemType;
+  var itemType = state.itemType;
   var scope = state.scope;
 
   var submit;
@@ -23,11 +22,11 @@ export default function (props, state) {
   }
 
   if (itemType === "student") {
-    inputForms = StudentForm.call(this.handleValueChange, props.focusItem);
+    inputForms = StudentForm(this.handleValueChange, state.focusItem);
   } else if (itemType === "book") {
-    inputForms = BookForm.call(this.handleValueChange, props.focusItem);
+    inputForms = BookForm(this.handleValueChange, state.focusItem);
   } else if (itemType === "code") {
-    inputForms = CodeForm.call(this.handleValueChange, props.focusItem);
+    inputForms = CodeForm(this.handleValueChange, state.focusItem);
   }
 
   return (

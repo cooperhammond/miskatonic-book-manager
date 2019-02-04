@@ -6,6 +6,7 @@ import update from 'immutability-helper';
 
 import DataActions from '../../actions/DataActions';
 import FocusStore from '../../stores/FocusStore';
+import DataStore from '../../stores/DataStore';
 
 class PopupForm extends Component {
 
@@ -42,7 +43,7 @@ class PopupForm extends Component {
     event.preventDefault(); // prevent reload
 
     if (this.state.data !== {}) {
-      DataActions.createItem(this.props.itemType, this.state.data);
+      DataActions.createItem(this.state.itemType, this.state.data);
       this.closeSelf();
     }
   }
@@ -51,7 +52,7 @@ class PopupForm extends Component {
     event.preventDefault();
 
     if (this.state.data !== {}) {
-      DataActions.updateItem(this.props.itemType, this.props.itemId,
+      DataActions.updateItem(this.state.itemType, this.state.itemId,
         this.state.data);
       this.closeSelf();
     }
@@ -72,13 +73,21 @@ class PopupForm extends Component {
     document.addEventListener("keydown", this.escFunction, false);
 
     var scope = FocusStore.getFocusScope();
+    var itemType = FocusStore.getItemType();
+    var defaultItemData = {};
+
+    if (FocusStore.getItemType() === "code") {
+      defaultItemData = {
+        student: null,
+        book: DataStore.getItems("book")[0]._id
+      }
+    }
 
     this.setState({
       scope: scope,
+      itemType: itemType,
+      data: defaultItemData
     });
-
-    // TODO: set preset data according to itemtype
-    //  data: { book: DataStore.getItems("book")[0]._id },
   }
 
   componentWillUnmount(){

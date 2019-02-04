@@ -35,6 +35,7 @@ var _scope = _scopes.general;
 var _itemType = _itemTypes.student;
 
 var _focusItem = null;
+var _pastFocusItems = [];
 var _displayTitle = updateDisplayTitle();
 
 
@@ -54,6 +55,10 @@ let FocusStore = assign({}, EventEmitter.prototype, {
 
   getFocusItem: function() {
     return _focusItem;
+  },
+
+  getPastFocusItem: function(index) {
+    return _pastFocusItems[index];
   },
 
   emitChange: function() {
@@ -111,6 +116,11 @@ function changeView (args) {
     _focusItem = DataStore.getItemById(_itemType, itemId);
   } else if (itemIndex) {
     _focusItem = DataStore.getItemByIndex(_itemType, itemIndex);
+  } else {
+    if (_focusItem) {
+      _pastFocusItems.unshift(_focusItem);
+    }
+    _focusItem = null;
   }
 
   updateDisplayTitle();

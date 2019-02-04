@@ -25,6 +25,8 @@ export default function (callback, focusItem) {
     </option>
   );
 
+  // Default item values are in Popup.js
+
   return (
     <div>
 
@@ -47,7 +49,6 @@ export default function (callback, focusItem) {
         Assign the code to a student:
         <br />
         <select
-          value={undefined}
           data-key="student"
           onChange={callback}
         >
