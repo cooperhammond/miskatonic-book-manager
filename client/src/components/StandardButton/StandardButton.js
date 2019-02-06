@@ -1,8 +1,15 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Render from './StandardButtonRender';
 
 class StandardButton extends Component {
+
+  static propTypes = {
+    class: PropTypes.string,
+    icon: PropTypes.string,
+    onClick: PropTypes.func
+  }
 
   constructor(props) {
     super(props);

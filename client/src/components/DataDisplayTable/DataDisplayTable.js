@@ -1,10 +1,15 @@
 import Render from './DataDisplayTableRender';
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import FocusStore from '../../stores/FocusStore';
 import DataStore from '../../stores/DataStore';
 
 class DataDisplayTable extends Component {
+
+  static propTypes = {
+    onItemClick: PropTypes.func,
+  }
 
   constructor(props) {
     super(props);

@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Render from './FocusButtonRender';
 
@@ -6,6 +7,13 @@ import FocusActions from '../../actions/FocusActions';
 import FocusStore from '../../stores/FocusStore';
 
 class FocusButton extends Component {
+
+  static propTypes = {
+    icon: PropTypes.string,
+    displayName: PropTypes.string,
+    itemType: PropTypes.string,
+    focusScope: PropTypes.string
+  }
 
   constructor(props) {
     super(props);
