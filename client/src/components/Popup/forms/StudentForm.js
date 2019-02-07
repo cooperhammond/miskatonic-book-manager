@@ -1,25 +1,15 @@
 import React from 'react';
 
-export default function (callback, focusItem) {
-
-  if (!focusItem) {
-    focusItem = {
-      firstName: "",
-      lastName: "",
-      email: ""
-    }
-  }
+export default function (callback, data) {
 
   return (
     <div>
 
-      <div>Add Student</div>
-
       <label>
-        First Name
+        First Name:
         <input
           data-key="firstName"
-          placeholder={focusItem.firstName}
+          value={data.firstName}
           type="text"
           required={true}
           onChange={callback} />
@@ -27,10 +17,10 @@ export default function (callback, focusItem) {
 
       <br/>
       <label>
-        Last Name
+        Last Name:
         <input
           data-key="lastName"
-          placeholder={focusItem.lastName}
+          value={data.lastName}
           type="text"
           required={true}
           onChange={callback} />
@@ -38,10 +28,10 @@ export default function (callback, focusItem) {
 
       <br/>
       <label>
-        Email
+        Email:
         <input
           data-key="email"
-          placeholder={focusItem.email}
+          value={data.email}
           type="email"
           required={true}
           onChange={callback} />

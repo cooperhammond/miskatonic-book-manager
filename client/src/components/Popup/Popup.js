@@ -15,8 +15,10 @@ class PopupForm extends Component {
     super(props);
     this.state = {
       scope: null,
+      itemType: null,
+      itemId: null,
       data: {},
-      focusItem: null,
+      displayTitle: ""
     };
 
     // Bind callback methods to make `this` the correct context.
@@ -41,7 +43,7 @@ class PopupForm extends Component {
     }
   }
 
-  handleCreate(event) {
+  handleCreate(event) { // Create
     event.preventDefault(); // prevent reload
 
     if (this.state.data !== {}) {
@@ -50,7 +52,7 @@ class PopupForm extends Component {
     }
   }
 
-  handleUpdate(event) {
+  handleUpdate(event) { // update
     event.preventDefault();
 
     if (this.state.data !== {}) {
@@ -60,10 +62,49 @@ class PopupForm extends Component {
     }
   }
 
-  // reset data and close
-  closeSelf() {
-    this.setState({ data: {} });
-    FocusActions.closePopup();
+  componentDidMount(){
+    document.addEventListener("keydown", this.escFunction, false);
+
+    // To provide default data for the dropdown menus
+    var scope = FocusStore.getFocusScope();
+    var itemType = FocusStore.getItemType();
+    var focusItem = FocusStore.getFocusItem();
+    var itemId = focusItem ? focusItem._id : null;
+    var defaultItemData = {};
+    var displayTitle = "";
+
+    if (itemType === "student") {
+      displayTitle = focusItem ? "Update Student" : "Add Student"
+      defaultItemData = {
+        firstName: focusItem ? focusItem.firstName : "",
+        lastName: focusItem ? focusItem.lastName : "",
+        email: focusItem ? focusItem.email : ""
+      }
+    } else if (itemType === "book") {
+      displayTitle = focusItem ? "Update Book" : "Add Book"
+      defaultItemData = {
+        title: focusItem ? focusItem.title : "",
+        author: focusItem ? focusItem.author : ""
+      }
+    } else if (itemType === "code") {
+      displayTitle = focusItem ? "Update Code" : "Create Code"
+      defaultItemData = {
+        student: focusItem ? focusItem.student : null,
+        book: focusItem ? focusItem.book : DataStore.getItems("book")[0]._id
+      }
+    }
+
+    this.setState({
+      scope: scope,
+      itemId: itemId,
+      itemType: itemType,
+      data: defaultItemData,
+      displayTitle: displayTitle
+    });
+  }
+
+  componentWillUnmount(){
+    document.removeEventListener("keydown", this.escFunction, false);
   }
 
   // Press escape to close the popup window
@@ -73,31 +114,9 @@ class PopupForm extends Component {
     }
   }
 
-  componentDidMount(){
-    document.addEventListener("keydown", this.escFunction, false);
-
-
-    // To provide default data for the dropdown menus
-    var scope = FocusStore.getFocusScope();
-    var itemType = FocusStore.getItemType();
-    var defaultItemData = {};
-
-    if (FocusStore.getItemType() === "code") {
-      defaultItemData = {
-        student: null,
-        book: DataStore.getItems("book")[0]._id
-      }
-    }
-
-    this.setState({
-      scope: scope,
-      itemType: itemType,
-      data: defaultItemData
-    });
-  }
-
-  componentWillUnmount(){
-    document.removeEventListener("keydown", this.escFunction, false);
+  // reset data and close
+  closeSelf() {
+    FocusActions.closePopup();
   }
 
   render () {

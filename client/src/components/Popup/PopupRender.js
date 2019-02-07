@@ -23,16 +23,18 @@ export default function (props, state) {
 
   // Do not use .call on these methods
   if (itemType === "student") {
-    inputForms = StudentForm(this.handleValueChange, state.focusItem);
+    inputForms = StudentForm(this.handleValueChange, state.data);
   } else if (itemType === "book") {
-    inputForms = BookForm(this.handleValueChange, state.focusItem);
+    inputForms = BookForm(this.handleValueChange, state.data);
   } else if (itemType === "code") {
-    inputForms = CodeForm(this.handleValueChange, state.focusItem);
+    inputForms = CodeForm(this.handleValueChange, state.data);
   }
 
   return (
     <div className="popup-wrapper">
       <div className="popup-form">
+
+        <div>{state.displayTitle}</div>
 
         <StandardButton
           onClick={this.closeSelf}

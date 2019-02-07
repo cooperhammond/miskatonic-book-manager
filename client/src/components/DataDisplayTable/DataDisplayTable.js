@@ -34,91 +34,55 @@ class DataDisplayTable extends Component {
   }
 
   _onChange() {
-    var scope = FocusStore.getFocusScope();
     var itemType = FocusStore.getItemType();
+    var rawData = DataStore.getItems(itemType);
 
-    var rawData;
     var labels = [];
     var accessors = [];
     var rows = [];
 
-    if (scope === "general") {
-
-      rawData = DataStore.getItems(itemType);
-
-      if (itemType === "student") {
-        labels = [
-          "Name",
-          "Email",
-          "Books"
-        ];
-        accessors = [
-          (d) => `${d["lastName"]}, ${d["firstName"]}`,
-          "email",
-          "codes"
-        ];
-      } else if (itemType === "book") {
-        labels = [
-          "Title",
-          "Codes",
-          "Readers"
-        ];
-        accessors = [
-          "title",
-          "codes",
-          "readers"
-        ];
-      } else if (itemType === "code") {
-        labels = [
-          "Book",
-          "Code",
-          "User"
-        ];
-        accessors = [
-          (d) => {
-            var book = DataStore.getItemById("book", d.book);
-            return book.title;
-          },
-          "code",
-          (d) => {
-            if (d.student) {
-              var student = DataStore.getItemById("student", d.student);
-              return `${student.lastName}, ${student.firstName}`;
-            }
-            return "None";
-          }
-        ]
-        // TODO: figure out what to use for labels and accessors here
-      }
-
-    } else {
-
-      rawData = FocusStore.getFocusItem();
-
-      if (itemType === "student") {
-        labels = [
-          "Title",
-          "Author"
-        ];
-        accessors = [
-          "title",
-          "author"
-        ];
-      } else if (itemType === "book") {
-        labels = [
-          "Name",
-          "Email",
-        ];
-        accessors = [
-          (d) => {
-            var student = DataStore.getItemById(itemType, d._id);
+    if (itemType === "student") {
+      labels = [
+        "Name",
+        "Email",
+        "Books"
+      ];
+      accessors = [
+        (d) => `${d["lastName"]}, ${d["firstName"]}`,
+        "email",
+        "codes"
+      ];
+    } else if (itemType === "book") {
+      labels = [
+        "Title",
+        "Codes",
+        "Readers"
+      ];
+      accessors = [
+        "title",
+        "codes",
+        "readers"
+      ];
+    } else if (itemType === "code") {
+      labels = [
+        "Book",
+        "Code",
+        "User"
+      ];
+      accessors = [
+        (d) => {
+          var book = DataStore.getItemById("book", d.book);
+          return book.title;
+        },
+        "code",
+        (d) => {
+          if (d.student) {
+            var student = DataStore.getItemById("student", d.student);
             return `${student.lastName}, ${student.firstName}`;
-          },
-          (d) => DataStore.getItemById(itemType, d._id).email,
-        ];
-      } else if (itemType === "code") {
-        // TODO: figure out what to use for labels and accessors here
-      }
+          }
+          return "None";
+        }
+      ]
     }
 
     if (rawData && labels !== [] && accessors !== []) {

@@ -2,7 +2,7 @@ import React from 'react';
 
 import DataStore from '../../../stores/DataStore';
 
-export default function (callback, focusItem) {
+export default function (callback, data) {
 
   var books = DataStore.getItems("book").map(function (book, index) {
     return (
@@ -30,14 +30,13 @@ export default function (callback, focusItem) {
   return (
     <div>
 
-      <div>Create code</div>
-
       <label>
-        Assign the code to a book:
+        Book attached to code:
         <br />
         <select
           data-key="book"
           required={true}
+          value={data.book ? data.book : undefined}
           onChange={callback}
         >
           {books}
@@ -46,10 +45,11 @@ export default function (callback, focusItem) {
 
       <br />
       <label>
-        Assign the code to a student:
+        Student code is assigned to:
         <br />
         <select
           data-key="student"
+          value={data.student ? data.student : undefined}
           onChange={callback}
         >
           {students}

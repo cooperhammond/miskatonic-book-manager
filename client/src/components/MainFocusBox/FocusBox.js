@@ -9,9 +9,7 @@ class FocusBox extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      displayName: null,
-    };
+    this.state = {};
 
     // Bind callback methods to make `this` the correct context.
     this.onItemClick = this.onItemClick.bind(this);
@@ -32,7 +30,7 @@ class FocusBox extends Component {
   }
 
   _onChange() {
-    var displayName = FocusStore.getDisplayTitle();
+    var displayName = FocusStore.getGeneralDisplayTitle(FocusStore.getItemType());
 
     this.setState({
       displayName: displayName,

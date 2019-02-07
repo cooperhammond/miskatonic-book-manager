@@ -140,8 +140,6 @@ function updateItem(itemType, id, data) {
     data: data
   }
 
-  console.log(req);
-
   request.put(url, { form: data }, function (err, res, body) {
     changeData(err, res, body, req);
   });
@@ -173,7 +171,6 @@ function changeData(err, res, body, req) {
 
     if (itemType === _itemTypes.code) {
       if (typeof req.data.student === "string") {
-        console.log(body);
         updateItem(_itemTypes.student, req.data.student, {
           addCode: JSON.parse(body).id,
         });

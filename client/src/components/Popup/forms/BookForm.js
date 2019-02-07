@@ -1,24 +1,15 @@
 import React from 'react';
 
-export default function (callback, focusItem) {
-
-  if (!focusItem) {
-    focusItem = {
-      title: "",
-      author: ""
-    }
-  }
+export default function (callback, data) {
 
   return (
     <div>
-
-      <div>Add Book</div>
 
       <label>
         Title:
         <input
           data-key="title"
-          placeholder={focusItem.title}
+          value={data.title}
           type="text"
           required={true}
           onChange={callback} />
@@ -29,7 +20,7 @@ export default function (callback, focusItem) {
         Author:
         <input
           data-key="author"
-          placeholder={focusItem.author}
+          value={data.author}
           type="text"
           required={true}
           onChange={callback} />

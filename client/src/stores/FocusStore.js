@@ -58,6 +58,10 @@ let FocusStore = assign({}, EventEmitter.prototype, {
     return _focusItem;
   },
 
+  getGeneralDisplayTitle: function(itemType) {
+    return _generalDisplayTitles[itemType];
+  },
+
   getPastFocusItem: function(index) {
     return _pastFocusItems[index];
   },
@@ -91,10 +95,15 @@ FocusStore.dispatchToken = AppDispatcher.register(function(action) {
     break;
     case FocusActionTypes.POPUP_CLOSED:
       _showPopup = false;
+      changeView({
+        newScope: "general",
+      });
       FocusStore.emitChange();
     break;
     case FocusActionTypes.POPUP_OPENED:
-      _showPopup = true;
+      changeView({
+        newScope: _itemType
+      });
       FocusStore.emitChange();
     break;
     default:
@@ -119,6 +128,13 @@ function changeView (args) {
 
   if (Object.values(_scopes).includes(newScope)) {
     _scope = newScope;
+
+    // Check if zoomed into specific item
+    if (_scope !== _scopes.general) {
+      _showPopup = true;
+    } else {
+      _showPopup = false;
+    }
   }
 
   if (Object.values(_itemTypes).includes(newItemType)) {
@@ -147,7 +163,7 @@ function updateDisplayTitle() {
     _displayTitle = _generalDisplayTitles[_itemType];
 
   } else {
-    var item = _focusItem;
+    var item = _focusItem ? _focusItem : _pastFocusItems[0];
 
     if (_itemType === _itemTypes.student) {
 
