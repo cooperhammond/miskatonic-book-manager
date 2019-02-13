@@ -34,13 +34,11 @@ class PopupForm extends Component {
     var value = target.value;
     var key = target.dataset.key;
 
-    if (value !== "") {
-      this.setState({
-        data: update(this.state.data, {
-          [key]: {$set: value}
-        }),
-      });
-    }
+    this.setState({
+      data: update(this.state.data, {
+        [key]: {$set: value}
+      }),
+    });
   }
 
   handleCreate(event) { // Create
@@ -89,7 +87,8 @@ class PopupForm extends Component {
     } else if (itemType === "code") {
       displayTitle = focusItem ? "Update Code" : "Create Code"
       defaultItemData = {
-        student: focusItem ? focusItem.student : null,
+        student: (focusItem ? (focusItem.student ? focusItem.student
+                  : "") : ""),
         book: focusItem ? focusItem.book : DataStore.getItems("book")[0]._id
       }
     }

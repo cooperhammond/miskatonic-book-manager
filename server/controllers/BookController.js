@@ -1,70 +1,89 @@
 const Book = require('../models/BookModel');
 
 exports.create = function (req, res) {
-  let book = new Book(
-    {
-      title: req.body.title,
-      author: req.body.author
-    }
-  );
+  var query = Book.create({
+    title: req.body.title,
+    author: req.body.author
+  });
 
-  book.save(function (err) {
-    if (err) {
-      res.send(err);      // There's an error! Alert the client!
-      console.error(err); // There's an error! Alert us!
-    } else {
-      res.send({
-        message: `"${req.body.title}" created successfully!`
-      });
-    }
-  })
+  query.then((book) => {
+    res.status(200).send(book);
+  });
+
+  query.catch((err) => {
+    res.status(500).json(err);
+  });
 }
 
-exports.readAll = function (req, res) {
-  Book.find({}, function (err, books) {
-    if (err) {
-      res.send(err);      // There's an error! Alert the client!
-      console.error(err); // There's an error! Alert us!
-    } else {
-      res.send(books);
-    }
+exports.readAll = function (_, res) {
+  var query = Book.find({});
+
+  query.then((books) => {
+    res.status(200).send(books);
+  });
+
+  query.catch((err) => {
+    return res.status(500).json(err);
   });
 }
 
 exports.readSingle = function (req, res) {
-  Book.findById(req.params.id, function (err, book) {
-    if (err) {
-      res.send(err);      // There's an error! Alert the client!
-      console.error(err); // There's an error! Alert us!
+  var query = Book.findOne({ _id: req.params.id });
+
+  query.then((book) => {
+    if (book) {
+      res.status(200).send(book);
     } else {
-      res.send(book);
+      res.status(404).send({
+        message: "Book not found",
+        id: req.params.id
+      });
     }
+  });
+
+  query.catch((err) => {
+    return res.status(500).json(err);
   });
 }
 
 exports.update = function (req, res) {
-  Book.findByIdAndUpdate(req.params.id, {$set: req.body},
-    function (err, book) {
-      if (err) {
-        res.send(err);      // There's an error! Alert the client!
-        console.error(err); // There's an error! Alert us!
-      } else {
-        res.send({
-          message: "Book updated!"
-        });
-      }
-    });
+  var query = Book.findByIdAndUpdate(
+    { _id: req.params.id },
+    { $set: req.body });
+
+  query.then((book) => {
+    if (book) {
+      res.status(200).send(book);
+    } else {
+      res.status(404).send({
+        message: "Book not found",
+        id: req.params.id
+      });
+    }
+  });
+
+  query.catch((err) => {
+    return res.status(500).json(err);
+  });
 }
 
 exports.delete = function (req, res) {
-  Book.findByIdAndRemove(req.params.id, function (err) {
-    if (err) {
-      res.send(err);      // There's an error! Alert the client!
-      console.error(err); // There's an error! Alert us!
+  var query = Book.findOne({ _id: req.params.id });
+
+  query.then(async (book) => {
+    if (book) {
+      await book.remove();
+      res.status(200).send({
+        message: "Book deleted",
+      });
     } else {
-      res.send({
-        message: "Book deleted!"
+      res.status(404).send({
+        message: "Book not found"
       });
     }
+  });
+
+  query.catch((err) => {
+    res.status(500).json(err);
   });
 }

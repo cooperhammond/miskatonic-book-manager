@@ -2,104 +2,90 @@ const Student = require('../models/StudentModel');
 const mongoose = require("mongoose");
 
 exports.create = function (req, res) {
-  let student = new Student(
-    {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email
-    }
-  );
+  var query = Student.create({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email
+  });
 
-  student.save(function (err) {
-    if (err) {
-      res.send(err);      // There's an error! Alert the client!
-      console.error(err); // There's an error! Alert us!
-    } else {
-      res.send({
-        message: 'Student created successfully!',
-        id: student.id
-      });
-    }
-  })
+  query.then((student) => {
+    res.status(200).send(student);
+  });
+
+  query.catch((err) => {
+    return res.status(500).json(err);
+  });
 }
 
-exports.readAll = function (req, res) {
-  Student.find({}, function (err, students) {
-    if (err) {
-      res.send(err);      // There's an error! Alert the client!
-      console.error(err); // There's an error! Alert us!
-    } else {
-      res.send(students);
-    }
+exports.readAll = function (_, res) {
+  var query = Student.find({});
+
+  query.then((students) => {
+    res.status(200).send(students);
+  });
+
+  query.catch((err) => {
+    return res.status(500).json(err);
   });
 }
 
 exports.readSingle = function (req, res) {
-  Student.findById(req.params.id, function (err, student) {
-    if (err) {
-      res.send(err);      // There's an error! Alert the client!
-      console.error(err); // There's an error! Alert us!
+  var query = Student.findOne({ _id: req.params.id });
+
+  query.then((student) => {
+    if (student) {
+      res.status(200).send(student);
     } else {
-      res.send(student);
+      res.status(404).send({
+        message: "Student not found",
+        id: req.params.id
+      });
     }
+  });
+
+  query.catch((err) => {
+    return res.status(500).json(err);
   });
 }
 
 exports.update = function (req, res) {
-  var body = req.body;
+  var query = Student.findByIdAndUpdate(
+    { _id: req.params.id },
+    { $set: req.body });
 
-  console.log(body);
+  query.then((student) => {
+    if (student) {
+      res.status(200).send(student);
+    } else {
+      res.status(404).send({
+        message: "Student not found",
+        id: req.params.id
+      });
+    }
+  });
 
-  if (body.addCode) {
-    Student.findByIdAndUpdate(req.params.id,
-      { $push: { "codes": mongoose.Types.ObjectId(body.addCode) } },
-      {safe: true, upsert: true},
-      function (err, student) {
-        if (err) {
-          res.send(err);      // There's an error! Alert the client!
-          console.error(err); // There's an error! Alert us!
-        }
-      },
-    );
-  } else if (body.removeCode) {
-    Student.findByIdAndUpdate(req.params.id,
-      { $pull: { codes: body.removeCode }},
-      {safe: true, upsert: true},
-      function (err, student) {
-        if (err) {
-          res.send(err);      // There's an error! Alert the client!
-          console.error(err); // There's an error! Alert us!
-        }
-      },
-    );
-  }
-
-  delete body["addCode"];
-  delete body["removeCode"];
-
-
-  Student.findByIdAndUpdate(req.params.id, {$set: body},
-    function (err, student) {
-      if (err) {
-        res.send(err);      // There's an error! Alert the client!
-        console.error(err); // There's an error! Alert us!
-      } else {
-        res.send({
-          message: "Student updated!"
-        });
-      }
-    });
+  query.catch((err) => {
+    return res.status(500).json(err);
+  });
 }
 
 exports.delete = function (req, res) {
-  Student.findByIdAndRemove(req.params.id, function (err) {
-    if (err) {
-      res.send(err);      // There's an error! Alert the client!
-      console.error(err); // There's an error! Alert us!
+  var query = Student.findOne({ _id: req.params.id });
+
+  query.then(async (student) => {
+    if (student) {
+      await student.remove();
+      res.status(200).send({
+        message: "Student deleted"
+      });
     } else {
-      res.send({
-        message: "Student deleted!"
+      res.status(400).send({
+        message: "Student not found"
       });
     }
+  });
+
+  query.catch((err) => {
+    res.status(500).json(err)
   });
 }

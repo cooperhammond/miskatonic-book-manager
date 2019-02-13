@@ -5,8 +5,6 @@ import StandardButton from '../StandardButton/StandardButton';
 
 import "./focusbox.scss";
 
-import FocusActions from '../../actions/FocusActions'
-
 export default function (props, state) {
 
   return (
@@ -15,7 +13,7 @@ export default function (props, state) {
       <div className='header'>{state.displayName}</div>
 
       <StandardButton
-        onClick={FocusActions.openPopup}
+        onClick={this.onButtonClick}
         class="add-button"
         icon="+"
       />

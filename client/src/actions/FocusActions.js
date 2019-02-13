@@ -14,9 +14,10 @@ var FocusActions = {
       type: FocusActionTypes.POPUP_CLOSED,
     });
   },
-  openPopup: function() {
+  openPopup: function(action) {
     AppDispatcher.dispatch({
       type: FocusActionTypes.POPUP_OPENED,
+      action: action
     });
   }
 };

@@ -15,9 +15,9 @@ export default function (props, state) {
   var submit;
   var inputForms;
 
-  if (scope === "general") {
+  if (scope === "create") {
     submit = this.handleCreate;
-  } else {
+  } else if (scope === "update") {
     submit = this.handleUpdate;
   }
 

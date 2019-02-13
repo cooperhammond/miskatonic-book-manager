@@ -1,73 +1,92 @@
 const Code = require('../models/CodeModel');
 
 exports.create = function (req, res) {
-  let code = new Code(
-    {
-      book: req.body.book,
-      student: req.body.student ? req.body.student : null
-    }
-  );
+  var query = Code.create({
+    book: req.body.book,
+    student: req.body.student ? req.body.student : null
+  });
 
-  code.save(function (err) {
-    if (err) {
-      res.send(err);      // There's an error! Alert the client!
-      console.error(err); // There's an error! Alert us!
-    } else {
-      res.send({
-        message: "Code created successfully!",
-        id: code.id,
-      });
-    }
+  query.then((code) => {
+    res.status(200).send(code);
   })
+
+  query.catch((err) => {
+    res.status(500).json(err);
+  });
 }
 
 exports.readAll = function (req, res) {
-  Code.find({}, function (err, codes) {
-    if (err) {
-      res.send(err);      // There's an error! Alert the client!
-      console.error(err); // There's an error! Alert us!
-    } else {
-      res.send(codes);
-    }
+  var query = Code.find({});
+
+  query.then((codes) => {
+    res.status(200).send(codes);
+  });
+
+  query.catch((err) => {
+    return res.status(500).json(err);
   });
 }
 
 exports.readSingle = function (req, res) {
-  Code.findById(req.params.id, function (err, code) {
-    if (err) {
-      res.send(err);      // There's an error! Alert the client!
-      console.error(err); // There's an error! Alert us!
+  var query = Code.findOne({ _id: req.params.id });
+
+  query.then((code) => {
+    if (code) {
+      res.status(200).send(code);
     } else {
-      res.send(code);
+      res.status(404).send({
+        message: "Code not found",
+        id: req.params.id
+      });
     }
+  });
+
+  query.catch((err) => {
+    return res.status(500).json(err);
   });
 }
 
 exports.update = function (req, res) {
-  Code.findByIdAndUpdate(req.params.id, {$set: req.body},
-    function (err, code) {
-      if (err) {
-        res.send(err);      // There's an error! Alert the client!
-        console.error(err); // There's an error! Alert us!
-      } else {
-        res.send({
-          message: "Code updated!"
-        });
-      }
-    });
-}
+  var query = Code.findOne({ _id: req.params.id });
 
-exports.delete = function (req, res) {
-  Code.findByIdAndRemove(req.params.id, function (err) {
-    if (err) {
-      res.send(err);      // There's an error! Alert the client!
-      console.error(err); // There's an error! Alert us!
+  query.then(async(code) => {
+    if (code) {
+      await code.update({ $set: req.body });
+      res.status(200).send({
+        message: "Code updated",
+        id: code.id,
+        changes: req.body
+      });
     } else {
-      res.send({
-        message: "Code deleted!"
+      res.status(404).send({
+        message: "Code not found",
+        id: req.params.id
       });
     }
   });
-  // TODO: make it so that when a code is deleted, it is removed from
-  // the associated student's inventory
+
+  query.catch((err) => {
+    return res.status(500).json(err);
+  });
+}
+
+exports.delete = function (req, res) {
+  var query = Code.findOne({ _id: req.params.id });
+
+  query.then(async (code) => {
+    if (code) {
+      await code.remove();
+      res.status(200).send({
+        message: "Code deleted"
+      });
+    } else {
+      res.status(400).send({
+        message: "Code not found"
+      });
+    }
+  });
+
+  query.catch((err) => {
+    res.status(500).json(err)
+  });
 }

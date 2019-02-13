@@ -19,13 +19,18 @@ class FocusBox extends Component {
   onItemClick (event) {
     var target = event.target;
     var index = target.dataset.index;
-    var newScope = FocusStore.getItemType();
 
     // Switch to a specific view of the item itself
     FocusActions.changeView({
-      newScope : newScope,
+      newScope : "update",
       itemType : FocusStore.getItemType(),
       itemIndex: index,
+    });
+  }
+
+  onButtonClick() {
+    FocusActions.changeView({
+      newScope: "create",
     });
   }
 
@@ -46,7 +51,7 @@ class FocusBox extends Component {
     FocusStore.removeChangeListener(this._onChange);
   }
 
-  render () {
+  render() {
     return Render.call(this, this.props, this.state);
   }
 }

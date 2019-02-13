@@ -16,9 +16,8 @@ var _itemTypes = {
 
 var _scopes = {
   general: "general",
-  student: "student",
-  book   : "book",
-  code   : "code"
+  create : "create",
+  update : "update"
 }
 
 // `itemType`: `displayTitle`
@@ -101,9 +100,11 @@ FocusStore.dispatchToken = AppDispatcher.register(function(action) {
       FocusStore.emitChange();
     break;
     case FocusActionTypes.POPUP_OPENED:
-      changeView({
-        newScope: _itemType
-      });
+      if (Object.values(_scopes).includes(action.action)) {
+        changeView({
+          newScope: action.action,
+        });
+      }
       FocusStore.emitChange();
     break;
     default:
@@ -130,7 +131,7 @@ function changeView (args) {
     _scope = newScope;
 
     // Check if zoomed into specific item
-    if (_scope !== _scopes.general) {
+    if (_scope === _scopes.create || _scope === _scopes.update) {
       _showPopup = true;
     } else {
       _showPopup = false;
@@ -162,7 +163,7 @@ function updateDisplayTitle() {
 
     _displayTitle = _generalDisplayTitles[_itemType];
 
-  } else {
+  } else if (_scope === _scopes.update) {
     var item = _focusItem ? _focusItem : _pastFocusItems[0];
 
     if (_itemType === _itemTypes.student) {

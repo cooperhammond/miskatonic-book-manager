@@ -36,7 +36,7 @@ export default function (callback, data) {
         <select
           data-key="book"
           required={true}
-          value={data.book ? data.book : undefined}
+          value={data.book}
           onChange={callback}
         >
           {books}
@@ -49,7 +49,7 @@ export default function (callback, data) {
         <br />
         <select
           data-key="student"
-          value={data.student ? data.student : undefined}
+          value={data.student}
           onChange={callback}
         >
           {students}

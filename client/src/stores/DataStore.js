@@ -133,6 +133,7 @@ function readItems(itemType) {
 function updateItem(itemType, id, data) {
   var url = SERVER_URL + `/${_itemTypeDomains[itemType]}/${id}/update`;
 
+
   var req = {
     requestType: "put",
     itemType: itemType,
@@ -159,6 +160,9 @@ function deleteItem(itemType, id) {
   });
 }
 
+/* IMPORTANT TOOD:
+   update readers and codes for books when a code is updated or created */
+
 function changeData(err, res, body, req) {
   if (err) {
     return console.log(err);
@@ -167,39 +171,12 @@ function changeData(err, res, body, req) {
   var itemType = req.itemType;
   var requestType = req.requestType;
 
-  if (requestType === "post") { // Update
-
-    if (itemType === _itemTypes.code) {
-      if (typeof req.data.student === "string") {
-        updateItem(_itemTypes.student, req.data.student, {
-          addCode: JSON.parse(body).id,
-        });
-      }
-    }
-
-  } else if (requestType === "put") { // Create
-
-
-    if (itemType === _itemTypes.code) {
-      var oldCode = DataStore.getItemById(_itemTypes.code, req.id);
-
-      // Check that there was a student and now there isn't
-      // and then remove the code in the associated students inventory
-      if (oldCode.student != null && req.data.student == null) {
-        updateItem(_itemTypes.student, req.data.student, {
-          removeCode: oldCode.student
-        })
-      }
-    }
-
-  }
-
   if (requestType === "get") { // Read
     body = sortData(_itemSortKeys[itemType], body); // Sort the data
     _data[itemType] = body; // Update the data in corresponding key
   } else {
-    // Otherwise, an item had been created, updated, or deleted, so
-    // update our cache
+    /* Otherwise, an item had been created, updated, or deleted, so
+       update our cache */
     readItems(itemType);
   }
 
