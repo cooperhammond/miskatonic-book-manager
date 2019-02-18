@@ -4,15 +4,17 @@ import "./datadisplaytable.scss";
 
 export default function (props, state) {
 
+  var functions = this;
+
   var labels = state.labels.map(function (label, index) {
     return <th key={label + index}>{label}</th>;
   });
 
   var rows = state.rows.map(function (row, index) {
     return (
-      <tr data-index={index} key={row + index} onClick={props.onItemClick}>
+      <tr data-index={index} key={row + index} onClick={functions.onItemClick}>
         {row.map(function (element, index_) {
-          return <td data-index={index} key={element + index_}>{element}</td>;
+          return <td data-index={index} key={element+""+index_}>{element}</td>;
         })}
       </tr>
     )

@@ -7,22 +7,37 @@
   left: 0;
   right: 0;
   bottom: 0;
-  margin: auto;
   background-color: rgba(0,0,0, 0.5);
+
+  display: flex;
+  justify-content: space-evenly;
+  vertical-align: middle;
+  align-items: center;
+
+  .side-info {
+    border-radius: 6px;
+    padding: 5vh;
+    background: white;
+
+    display: table;
+
+    .associated-item-titles {
+      padding-top: 2.4vh;
+      padding-bottom: 2vh;
+      text-align: left;
+      font-size: 3.5vh;
+      padding: 2vh;
+    }
+  }
 
   .popup-form {
     border-radius: 6px;
     padding: 5vh;
     background: white;
-
-    position: absolute;
-    left: 25%;
-    right: 25%;
-    top: 25%;
-    bottom: 25%;
-    margin: auto;
-
     font-size: 3vh;
+
+    display: table;
+
 
     label {
       font-size: 2vh;
@@ -78,11 +93,8 @@
         }
     }
 
-
-
     .close-button-wrapper {
 
-      display: inline-block;
       float: right;
       cursor: pointer;
 
@@ -96,9 +108,9 @@
       }
 
       .close-button {
-        position: absolute;
-        right: 3vh;
-        top: 2.2vh;
+        position: relative;
+        right: -2vh;
+        top: -2.5vh;
         width: 3vh;
         height: 3vh;
         opacity: 0.3;

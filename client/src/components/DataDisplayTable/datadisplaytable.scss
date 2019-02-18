@@ -14,8 +14,8 @@
   td, th {
     border-bottom: 1px solid #ddd;
     padding: 2vh;
-    min-width: 25vh;
-    max-width: 25vh;
+    min-width: 22vh;
+    max-width: 22vh;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -27,7 +27,8 @@
   }
 
   tbody {
-    height: 40vh;
+    height: auto;
+    max-height: 30vh;
 
     overflow-x: hidden;
     overflow-y: scroll;

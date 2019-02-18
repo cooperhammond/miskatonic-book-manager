@@ -18,7 +18,9 @@ export default function (props, state) {
         icon="+"
       />
 
-      <DataDisplayTable onItemClick={this.onItemClick} />
+      <DataDisplayTable 
+        tableType="general" 
+      />
 
     </div>
   );

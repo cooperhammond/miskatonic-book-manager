@@ -160,9 +160,6 @@ function deleteItem(itemType, id) {
   });
 }
 
-/* IMPORTANT TOOD:
-   update readers and codes for books when a code is updated or created */
-
 function changeData(err, res, body, req) {
   if (err) {
     return console.log(err);
@@ -178,6 +175,11 @@ function changeData(err, res, body, req) {
     /* Otherwise, an item had been created, updated, or deleted, so
        update our cache */
     readItems(itemType);
+    setTimeout(() => {
+      readItems(_itemTypes.student);
+      readItems(_itemTypes.book);
+      readItems(_itemTypes.code);
+    }, 5000);
   }
 
   DataStore.emitChange();

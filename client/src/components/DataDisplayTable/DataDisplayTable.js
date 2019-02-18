@@ -5,10 +5,13 @@ import PropTypes from 'prop-types';
 import FocusStore from '../../stores/FocusStore';
 import DataStore from '../../stores/DataStore';
 
+import FocusActions from '../../actions/FocusActions';
+
 class DataDisplayTable extends Component {
 
   static propTypes = {
-    onItemClick: PropTypes.func,
+    itemType: PropTypes.string,
+    data: PropTypes.array
   }
 
   constructor(props) {
@@ -20,22 +23,16 @@ class DataDisplayTable extends Component {
 
     // Bind callback methods to make `this` the correct context.
     this._onChange = this._onChange.bind(this);
-  }
-
-  componentDidMount() {
-    FocusStore.addChangeListener(this._onChange);
-    DataStore.addChangeListener(this._onChange);
-    this._onChange();
-  }
-
-  componentWillUnmount() {
-    FocusStore.removeChangeListener(this._onChange);
-    DataStore.removeChangeListener(this._onChange);
+    this.onItemClick = this.onItemClick.bind(this);
   }
 
   _onChange() {
-    var itemType = FocusStore.getItemType();
-    var rawData = DataStore.getItems(itemType);
+    var itemType = this.props.itemType 
+                  ? this.props.itemType
+                  : FocusStore.getItemType();
+    var rawData = this.props.data 
+                  ? this.props.data 
+                  : DataStore.getItems(itemType);
 
     var labels = [];
     var accessors = [];
@@ -84,7 +81,7 @@ class DataDisplayTable extends Component {
         }
       ]
     }
-
+    
     if (rawData && labels !== [] && accessors !== []) {
       // Map the data from raw server info to elements
       for (var datum_i = 0; datum_i < rawData.length; datum_i++) {
@@ -111,9 +108,36 @@ class DataDisplayTable extends Component {
       }
     }
 
-    this.setState({
-      labels: labels,
-      rows: rows
+    if (this._mounted) {
+      this.setState({
+        labels: labels,
+        rows: rows
+      });
+    }
+  }
+
+  componentDidMount() {
+    this._mounted = true;
+    FocusStore.addChangeListener(this._onChange);
+    DataStore.addChangeListener(this._onChange);
+    this._onChange();
+  }
+
+  componentWillUnmount() {
+    this._mounted = false;
+    FocusStore.removeChangeListener(this._onChange);
+    DataStore.removeChangeListener(this._onChange);
+  }
+
+  onItemClick (event) {
+    var target = event.target;
+    var index = target.dataset.index;
+
+    // Switch to a specific view of the item itself
+    FocusActions.changeView({
+      newScope : "update",
+      itemType : FocusStore.getItemType(),
+      itemIndex: index,
     });
   }
 
