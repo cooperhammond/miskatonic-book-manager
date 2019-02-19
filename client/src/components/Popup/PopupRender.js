@@ -33,8 +33,9 @@ export default function (props, state) {
   }
 
   return (
-    <div className="popup-wrapper">
-      <div className="popup-form" ref={this.scrollRef}>
+    <div className="popup-wrapper" onClick={this.closeSelf}>
+      <div className="popup-form" ref={this.scrollRef} 
+        onClick={e => e.stopPropagation()}>
 
        <StandardButton
           onClick={this.closeSelf}
@@ -53,20 +54,22 @@ export default function (props, state) {
       </div>
 
       {scope === "update" ? 
-        state.associatedItems.map((items) => {
-          return (
-            <div className="side-info">
-              <div className="associated-item-titles">
-                {items.itemTitle}
+        <div className="side-info" onClick={e => e.stopPropagation()}>
+          {state.associatedItems.map((items, index) => {
+            return (
+              <div key={items + index} className="associated-item-tables">
+                <div className="associated-item-titles">
+                  {items.itemTitle}
+                </div>
+                <DataDisplayTable 
+                  key={items.itemType}
+                  itemType={items.itemType}
+                  data={items.data}
+                /> 
               </div>
-              <DataDisplayTable 
-                key={items.itemType}
-                itemType={items.itemType}
-                data={items.data}
-              /> 
-            </div>
-          );
-        })
+            );
+          })}
+        </div>
         : null
       }
     </div>

@@ -11,8 +11,8 @@ var SERVER_URL = "http://localhost:3200";
 
 var _data = {
   student: [],
-  book: [],
-  code: [],
+  book   : [],
+  code   : [],
 };
 
 var _itemTypes = {
@@ -175,11 +175,22 @@ function changeData(err, res, body, req) {
     /* Otherwise, an item had been created, updated, or deleted, so
        update our cache */
     readItems(itemType);
+
     setTimeout(() => {
       readItems(_itemTypes.student);
       readItems(_itemTypes.book);
       readItems(_itemTypes.code);
-    }, 5000);
+    }, 1000);
+    setTimeout(() => {
+      readItems(_itemTypes.student);
+      readItems(_itemTypes.book);
+      readItems(_itemTypes.code);
+    }, 2000);
+    setTimeout(() => {
+      readItems(_itemTypes.student);
+      readItems(_itemTypes.book);
+      readItems(_itemTypes.code);
+    }, 3000);
   }
 
   DataStore.emitChange();

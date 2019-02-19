@@ -11,13 +11,21 @@ export default function (props, state) {
   });
 
   var rows = state.rows.map(function (row, index) {
+    var itemAccessor;
+
+    if (props.data) {
+      itemAccessor = props.data[index]._id;
+    } else {
+      itemAccessor = index;
+    }
+
     return (
-      <tr data-index={index} key={row + index} onClick={functions.onItemClick}>
+      <tr data-index={itemAccessor} key={row + index} onClick={functions.onItemClick}>
         {row.map(function (element, index_) {
-          return <td data-index={index} key={element+""+index_}>{element}</td>;
+          return <td data-index={itemAccessor} key={element+""+index_}>{element}</td>;
         })}
       </tr>
-    )
+    );
   });
 
   return (

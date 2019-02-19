@@ -21,14 +21,17 @@
 
     display: table;
 
+    .associated-item-tables:not(:first-child) {
+      padding-top: 3vh;
+    }
+
     .associated-item-titles {
-      padding-top: 2.4vh;
-      padding-bottom: 2vh;
       text-align: left;
       font-size: 3.5vh;
-      padding: 2vh;
     }
   }
+
+
 
   .popup-form {
     border-radius: 6px;

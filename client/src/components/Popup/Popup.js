@@ -78,19 +78,18 @@ class PopupForm extends Component {
       }
       associatedItems.push(associatedCodes);
 
-      console.log(associatedItems);
     } else if (itemType === "code" && focusItem) {
       var associatedBook = {
         itemType: "book",
-        itemTitle: "Books",
-        data: [DataStore.getItemById("code", focusItem.book)],
+        itemTitle: "Book",
+        data: [DataStore.getItemById("book", focusItem.book)],
       }
       associatedItems.push(associatedBook);
 
       if (focusItem.student) {
         var associatedStudent = {
           itemType: "student",
-          itemTitle: "Students",
+          itemTitle: "Student",
           data: [DataStore.getItemById("student", focusItem.student)],
         }
         associatedItems.push(associatedStudent);

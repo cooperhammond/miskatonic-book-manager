@@ -116,6 +116,26 @@ class DataDisplayTable extends Component {
     }
   }
 
+  onItemClick (event) {
+    var target = event.target;
+
+    var request = {
+      newScope    : "update",
+      newItemType : this.props.itemType 
+                    ? this.props.itemType : 
+                    FocusStore.getItemType(),
+    };
+
+    if (this.props.data) {
+      request.itemId = target.dataset.index;
+    } else {
+      request.itemIndex = target.dataset.index;
+    }
+
+    // Switch to a specific view of the item itself
+    FocusActions.changeView(request);
+  }
+
   componentDidMount() {
     this._mounted = true;
     FocusStore.addChangeListener(this._onChange);
@@ -127,18 +147,6 @@ class DataDisplayTable extends Component {
     this._mounted = false;
     FocusStore.removeChangeListener(this._onChange);
     DataStore.removeChangeListener(this._onChange);
-  }
-
-  onItemClick (event) {
-    var target = event.target;
-    var index = target.dataset.index;
-
-    // Switch to a specific view of the item itself
-    FocusActions.changeView({
-      newScope : "update",
-      itemType : FocusStore.getItemType(),
-      itemIndex: index,
-    });
   }
 
   render () {
