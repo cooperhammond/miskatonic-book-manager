@@ -92,8 +92,7 @@ DataStore.dispatchToken = AppDispatcher.register(function(action) {
     break;
     case DataActionTypes.DELETE_ITEM:
       if ( action.itemType !== undefined &&
-           action.id !== undefined &&
-           action.data !== undefined ) {
+           action.id !== undefined ) {
         deleteItem(action.itemType, action.id, action.data);
       }
     break;

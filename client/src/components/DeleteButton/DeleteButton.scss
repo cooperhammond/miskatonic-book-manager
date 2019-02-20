@@ -1,0 +1,39 @@
+.delete-button-wrapper {
+  float: right;
+  cursor: pointer;
+  
+  .delete-button {
+    position: relative;
+    right: -2vh;
+    top: -2.5vh;
+    width: 3vh;
+    height: 3vh;
+    opacity: 0.3;
+    margin-right: 1vh;
+
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+  
+  .delete-button:hover {
+    opacity: 1;
+  }
+  
+  .delete-button:before {
+    transform: rotate(45deg);
+  }
+  
+  .delete-button:after {
+    transform: rotate(-45deg);
+  }
+  
+  // Indicate the button is pressed
+  .pressed {
+    transition: all 0.1s ease;
+    transform: scale(0.9);
+  }
+}

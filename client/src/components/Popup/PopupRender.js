@@ -3,6 +3,7 @@ import React from 'react';
 import "./Popup.scss";
 
 import StandardButton from '../StandardButton/StandardButton';
+import DeleteButton from '../DeleteButton/DeleteButton';
 import DataDisplayTable from '../DataDisplayTable/DataDisplayTable';
 
 import StudentForm from './forms/StudentForm';
@@ -37,11 +38,19 @@ export default function (props, state) {
       <div className="popup-form" ref={this.scrollRef} 
         onClick={e => e.stopPropagation()}>
 
-       <StandardButton
-          onClick={this.closeSelf}
-          class="close-button"
-          icon=""
+        <StandardButton
+            onClick={this.closeSelf}
+            class="close-button"
+            icon=""
         />
+
+        {scope === "update" ?
+          <DeleteButton 
+            itemType={state.itemType}
+            itemId={state.itemId}
+          />
+         : null
+        }
 
         <div>{state.displayTitle}</div>
 
