@@ -37,6 +37,18 @@ export default function (callback, data) {
           onChange={callback} />
       </label>
 
+      <br/>
+      <label>
+        Grade:
+        <input 
+          data-key="grade"
+          value={data.grade || ""}
+          type="number" 
+          min="1" max="12" 
+          required={true} 
+          onChange={callback} />
+      </label>
+
     </div>
   )
 }

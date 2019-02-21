@@ -47,7 +47,7 @@ export default function (props, state) {
         <div className="no-item-title">
           There are no {state.itemType}s 
             {this.props.itemType 
-              ? " associated with this item"
+              ? " associated"
               : ""}.
         </div>
       </div>

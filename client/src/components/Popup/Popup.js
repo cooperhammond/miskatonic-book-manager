@@ -50,7 +50,8 @@ class PopupForm extends Component {
       defaultItemData = {
         firstName: focusItem ? focusItem.firstName : "",
         lastName: focusItem ? focusItem.lastName : "",
-        email: focusItem ? focusItem.email : ""
+        email: focusItem ? focusItem.email : "",
+        grade: focusItem ? focusItem.grade : ""
       }
     } else if (itemType === "book") {
       displayTitle = focusItem ? "Update Book" : "Add Book"

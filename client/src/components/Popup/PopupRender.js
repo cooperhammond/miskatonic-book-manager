@@ -65,7 +65,6 @@ export default function (props, state) {
       {scope === "update" ? 
         <div className="side-info" onClick={e => e.stopPropagation()}>
           {state.associatedItems.map((items, index) => {
-            console.log(items);
             return (
               <div key={items + index}>
                 { itemType !== "code" ? 

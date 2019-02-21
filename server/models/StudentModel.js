@@ -16,6 +16,10 @@ const studentSchema = new Schema(
       type: String,
       required: true,
     },
+    grade: {
+      type: Number,
+      required: true,
+    },
     codes: [
       {
         type: ObjectId,

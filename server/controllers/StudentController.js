@@ -5,7 +5,8 @@ exports.create = function (req, res) {
   var query = Student.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    email: req.body.email
+    email: req.body.email,
+    grade: req.body.grade
   });
 
   query.then((student) => {
