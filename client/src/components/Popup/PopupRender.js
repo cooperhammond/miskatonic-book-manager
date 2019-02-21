@@ -65,16 +65,27 @@ export default function (props, state) {
       {scope === "update" ? 
         <div className="side-info" onClick={e => e.stopPropagation()}>
           {state.associatedItems.map((items, index) => {
+            console.log(items);
             return (
-              <div key={items + index} className="associated-item-tables">
-                <div className="associated-item-titles">
-                  {items.itemTitle}
+              <div key={items + index}>
+                { itemType !== "code" ? 
+                  <StandardButton
+                    onClick={() => this.addAssociatedItem(items.itemType)}
+                    class="add-button"
+                    icon="+"
+                  />
+                  : null
+                }  
+                <div className="associated-item-tables">
+                  <div className="associated-item-titles">
+                    {items.itemTitle}
+                  </div>
+                  <DataDisplayTable 
+                    key={items.itemType}
+                    itemType={items.itemType}
+                    data={items.data}
+                  /> 
                 </div>
-                <DataDisplayTable 
-                  key={items.itemType}
-                  itemType={items.itemType}
-                  data={items.data}
-                /> 
               </div>
             );
           })}

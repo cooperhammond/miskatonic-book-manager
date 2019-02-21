@@ -28,6 +28,7 @@ class PopupForm extends Component {
     // Bind callback methods to make `this` the correct context.
     this._onChange = this._onChange.bind(this);
     this.handleValueChange = this.handleValueChange.bind(this);
+    this.addAssociatedItem = this.addAssociatedItem.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.closeSelf = this.closeSelf.bind(this);
@@ -119,6 +120,13 @@ class PopupForm extends Component {
       data: update(this.state.data, {
         [key]: {$set: value}
       }),
+    });
+  }
+
+  addAssociatedItem(itemType) {
+    FocusActions.changeView({
+      newScope: "create",
+      newItemType: itemType,
     });
   }
 

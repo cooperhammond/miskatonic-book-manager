@@ -15,8 +15,15 @@ const app = express();
 const router = express.Router();
 
 // Load the database url from the environment
-const dbRoute = "mongodb://" + process.env.DB_USERNAME + ":" +
-  process.env.DB_PASSWORD + process.env.DB_ROUTE;
+var dbRoute = "";
+
+if (process.env.DB_USERNAME && process.env.DB_PASSWORD) {
+  dbRoute = "mongodb://" + process.env.DB_USERNAME + ":" +
+    process.env.DB_PASSWORD + process.env.DB_ROUTE;
+} else {
+  dbRoute = "mongodb://" + process.env.DB_ROUTE;
+}
+
 
 // Load the port to run on from the environment
 const port = process.env.PORT || 3200;

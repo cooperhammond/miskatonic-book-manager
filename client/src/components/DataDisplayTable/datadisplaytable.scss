@@ -27,7 +27,7 @@
 
   tbody {
     height: auto;
-    max-height: 30vh;
+    max-height: 35vh;
 
     overflow-x: hidden;
     overflow-y: scroll;
@@ -45,7 +45,13 @@
   }
 }
 
+.no-item-title-wrapper {
+  text-align: center;
+}
+
 .no-item-title {
   padding: 4vh;
   display: inline-block;
+  text-align: center;
+  font-size: 3vh;
 }

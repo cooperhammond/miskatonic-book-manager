@@ -1,3 +1,6 @@
+$width: 79.5vh;
+$height: 47vh;
+
 .focusbox {
   height: auto;
   padding: 1%;
@@ -9,45 +12,51 @@
 
   clear: both;
 
+  min-width: $width;
+  max-width: $width;
+
+  min-height: $height;
+  max-height: $height;
+
   .header {
     float: left;
     font-size: 3.4vh;
     color: #9cb7cb;
   }
+}
 
-  .add-button-wrapper {
+.add-button-wrapper {
 
-    display: inline-block;
-    float: right;
-    margin-right: 2vh;
+  display: inline-block;
+  float: right;
+  margin-right: 2vh;
 
-    .add-button {
-      cursor: pointer;
-      height: 4vh;
-      width: 4vh;
-      border-radius: 100%;
-      background-color: #40a1ea;
+  .add-button {
+    cursor: pointer;
+    height: 4vh;
+    width: 4vh;
+    border-radius: 100%;
+    background-color: #40a1ea;
 
-      // Center text in the middle of the button
-      vertical-align: middle;
-      text-align: center;
-      padding: 0px;
-      overflow: hidden;
+    // Center text in the middle of the button
+    vertical-align: middle;
+    text-align: center;
+    padding: 0px;
+    overflow: hidden;
 
-      // Button press effect
-      transition: all 0.1s ease;
+    // Button press effect
+    transition: all 0.1s ease;
 
-      .icon {
-        color: #FFFFFF;
-        font-size: 3.15vh;
-        pointer-events: none; // WARNING: May limit onClick events
-      }
+    .icon {
+      color: #FFFFFF;
+      font-size: 3.15vh;
+      pointer-events: none; // WARNING: May limit onClick events
     }
+  }
 
-    // Indicate the button is pressed
-    .pressed {
-      transition: all 0.1s ease;
-      transform: scale(0.9);
-    }
+  // Indicate the button is pressed
+  .pressed {
+    transition: all 0.1s ease;
+    transform: scale(0.9);
   }
 }

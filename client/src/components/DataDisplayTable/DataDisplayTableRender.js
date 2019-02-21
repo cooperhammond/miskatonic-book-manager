@@ -43,8 +43,13 @@ export default function (props, state) {
     );
   } else {
     return (
-      <div className="no-item-title">
-        There are no {state.itemType}s associated with this item.
+      <div className="no-item-title-wrapper">
+        <div className="no-item-title">
+          There are no {state.itemType}s 
+            {this.props.itemType 
+              ? " associated with this item"
+              : ""}.
+        </div>
       </div>
     );
   }
