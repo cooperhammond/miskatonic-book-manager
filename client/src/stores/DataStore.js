@@ -180,16 +180,18 @@ function changeData(err, res, body, req) {
       readItems(_itemTypes.book);
       readItems(_itemTypes.code);
     }, 1000);
-    setTimeout(() => {
-      readItems(_itemTypes.student);
-      readItems(_itemTypes.book);
-      readItems(_itemTypes.code);
-    }, 2000);
+
     setTimeout(() => {
       readItems(_itemTypes.student);
       readItems(_itemTypes.book);
       readItems(_itemTypes.code);
     }, 3000);
+
+    setTimeout(() => {
+      readItems(_itemTypes.student);
+      readItems(_itemTypes.book);
+      readItems(_itemTypes.code);
+    }, 10000);
   }
 
   DataStore.emitChange();

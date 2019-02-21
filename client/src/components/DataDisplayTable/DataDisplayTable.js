@@ -42,7 +42,7 @@ class DataDisplayTable extends Component {
       labels = [
         "Name",
         "Email",
-        "Books"
+        "Checked Out Books"
       ];
       accessors = [
         (d) => `${d["lastName"]}, ${d["firstName"]}`,
@@ -52,8 +52,8 @@ class DataDisplayTable extends Component {
     } else if (itemType === "book") {
       labels = [
         "Title",
-        "Codes",
-        "Readers"
+        "Total Codes",
+        "Total Readers"
       ];
       accessors = [
         "title",
@@ -62,10 +62,13 @@ class DataDisplayTable extends Component {
       ];
     } else if (itemType === "code") {
       labels = [
-        "Book",
-        "Code",
-        "User"
+        "Associated Book",
+        "Checkout Code",
       ];
+      if (!(this.props.itemType === "code" 
+            && FocusStore.getItemType() === "student")) {      
+        labels[2] = "User";
+      }
       accessors = [
         (d) => {
           var book = DataStore.getItemById("book", d.book);
@@ -88,7 +91,7 @@ class DataDisplayTable extends Component {
         var datum = rawData[datum_i];
         var rowData = [];
 
-        for (var i = 0; i < accessors.length; i++) {
+        for (var i = 0; i < labels.length; i++) {
           var element;
           var accessor = accessors[i];
 
@@ -111,7 +114,8 @@ class DataDisplayTable extends Component {
     if (this._mounted) {
       this.setState({
         labels: labels,
-        rows: rows
+        rows: rows,
+        itemType: itemType
       });
     }
   }

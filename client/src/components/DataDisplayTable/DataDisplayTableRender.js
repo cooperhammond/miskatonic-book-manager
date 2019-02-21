@@ -28,16 +28,24 @@ export default function (props, state) {
     );
   });
 
-  return (
-    <table className="focus-table">
-      <thead>
-        <tr>
-          {labels}
-        </tr>
-      </thead>
-      <tbody>
-        {rows}
-      </tbody>
-    </table>
-  );
+  if (rows.length !== 0) {
+    return (
+      <table className="focus-table">
+        <thead>
+          <tr>
+            {labels}
+          </tr>
+        </thead>
+        <tbody>
+          {rows}
+        </tbody>
+      </table>
+    );
+  } else {
+    return (
+      <div className="no-item-title">
+        There are no {state.itemType}s associated with this item.
+      </div>
+    );
+  }
 }

@@ -69,7 +69,7 @@ class PopupForm extends Component {
     if ((itemType === "student" || itemType === "book") && focusItem) {
       var associatedCodes = {
         itemType: "code",
-        itemTitle: itemType === "student" ? "Student's Books" : "Book's Codes",
+        itemTitle: itemType === "student" ? "Student's Codes" : "Book's Codes",
         data: [],
       };
       for (let index = 0; index < focusItem.codes.length; index++) {
@@ -81,7 +81,7 @@ class PopupForm extends Component {
     } else if (itemType === "code" && focusItem) {
       var associatedBook = {
         itemType: "book",
-        itemTitle: "Book",
+        itemTitle: "Associated Book",
         data: [DataStore.getItemById("book", focusItem.book)],
       }
       associatedItems.push(associatedBook);
@@ -89,7 +89,7 @@ class PopupForm extends Component {
       if (focusItem.student) {
         var associatedStudent = {
           itemType: "student",
-          itemTitle: "Student",
+          itemTitle: "Assigned Student",
           data: [DataStore.getItemById("student", focusItem.student)],
         }
         associatedItems.push(associatedStudent);

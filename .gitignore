@@ -1,6 +1,9 @@
 # inspiration folder
 inspo/
 
+# large database
+database/
+
 # dependencies
 node_modules/
 .pnp/
