@@ -17,7 +17,18 @@ class ReportButton extends Component {
   }
 
   onClick() {
+    var url = "http://localhost:3200/report/download";
 
+    setTimeout(() => {
+      const response = {
+        file: url,
+      };
+      // server sent the url to the file!
+      // now, let's download:
+      window.open(response.file);
+      // you could also do:
+      // window.location.href = response.file;
+    }, 100);
   }
 
   onMouseDown() {

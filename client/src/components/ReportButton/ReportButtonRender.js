@@ -12,7 +12,7 @@ export default function (props, state) {
   return (
     <div
       className={classString}
-      onClick={props.onClick}
+      onClick={this.onClick}
       onMouseDown={this.onMouseDown}
       onMouseUp={this.onMouseUp}
       onMouseLeave={this.onMouseUp}
