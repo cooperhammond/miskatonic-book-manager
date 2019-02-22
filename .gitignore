@@ -1,6 +1,9 @@
 # inspiration folder
 inspo/
 
+# temp report file
+Report.xlsx
+
 # large database
 database/
 

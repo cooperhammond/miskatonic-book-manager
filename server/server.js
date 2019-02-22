@@ -10,9 +10,10 @@ var cors = require('cors');
 const BookRoutes = require('./routes/BookRoutes');
 const CodeRoutes = require('./routes/CodeRoutes');
 const StudentRoutes = require('./routes/StudentRoutes');
+const ReportRoute = require('./routes/ReportRoute');
+
 
 const app = express();
-const router = express.Router();
 
 // Load the database url from the environment
 var dbRoute = "";
@@ -56,3 +57,4 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 app.use('/books', BookRoutes);
 app.use('/codes', CodeRoutes);
 app.use('/students', StudentRoutes);
+app.use('/report', ReportRoute);

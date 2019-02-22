@@ -11,5 +11,8 @@
   },
   "devDependencies": {
     "foreman": "^3.0.1"
+  },
+  "dependencies": {
+    "excel4node": "^1.7.0"
   }
 }
