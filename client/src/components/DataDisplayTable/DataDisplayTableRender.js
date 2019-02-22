@@ -22,7 +22,15 @@ export default function (props, state) {
     return (
       <tr data-index={itemAccessor} key={row + index} onClick={functions.onItemClick}>
         {row.map(function (element, index_) {
-          return <td data-index={itemAccessor} key={element+""+index_}>{element}</td>;
+          if (validateEmail(element)) {
+            return (
+              <td key={element+""+index_} onClick={(e) => e.stopPropagation()}>
+                <a href={`mailto:${element}`}>{element}</a>
+              </td>
+            );
+          } else {
+            return <td data-index={itemAccessor} key={element+""+index_}>{element}</td>;
+          }
         })}
       </tr>
     );
@@ -53,4 +61,9 @@ export default function (props, state) {
       </div>
     );
   }
+}
+
+function validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
 }

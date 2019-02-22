@@ -1,8 +1,10 @@
 import React from 'react';
 
+import "./ReportButton.scss";
+
 export default function (props, state) {
 
-  var classString = "report-button";
+  var classString = "report-button floating";
   if ( state.isPressed ) {
     classString += ' pressed';
   }
@@ -15,7 +17,7 @@ export default function (props, state) {
       onMouseUp={this.onMouseUp}
       onMouseLeave={this.onMouseUp}
     >
-      Download Report
+      <div>Download Report</div>
     </div>
   );
 }

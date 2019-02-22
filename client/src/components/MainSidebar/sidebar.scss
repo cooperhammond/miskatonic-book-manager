@@ -1,15 +1,8 @@
 /* Sidebar! */
 .sidebar {
-  min-height: 10vh;
-
-  z-index: 1;
-  top: auto;
-  overflow-y: hidden;
-
   padding-top: .5em;
   padding-bottom: .5em;
 
-  display: table;
   text-align: center;
 
   .button {

@@ -1,0 +1,22 @@
+.report-button {
+  height: 10vh;
+
+  background-image: linear-gradient(
+    to bottom right, 
+    rgba(140, 0, 255, 0.698),
+    rgba(0, 119, 255, 0.705), 
+  );
+
+  display: flex;
+  text-align: center;
+  justify-content: center;  
+  align-items: center;
+
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.pressed {
+  transition: all 0.2s ease;
+  transform: scale(0.95);
+}
