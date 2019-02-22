@@ -1,11 +1,14 @@
 .report-button {
   height: 10vh;
+  width: 14vh;
 
   background-image: linear-gradient(
     to bottom right, 
     rgba(140, 0, 255, 0.698),
     rgba(0, 119, 255, 0.705), 
-  );
+  ), url("../../assets/document.svg");
+  background-position: left top, 6vh 2vh;
+  background-repeat: no-repeat, no-repeat;
 
   display: flex;
   text-align: center;
@@ -14,6 +17,7 @@
 
   color: #FFFFFF;
   font-weight: 700;
+  font-size: 2vh;
 }
 
 .pressed {

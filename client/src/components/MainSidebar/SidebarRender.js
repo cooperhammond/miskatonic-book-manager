@@ -1,6 +1,8 @@
 import React from 'react';
 
 import SideFocusButton from '../SideFocusButton/FocusButton';
+import ReportButton from '../ReportButton/ReportButton';
+
 import "./sidebar.scss";
 
 export default function () {
@@ -26,6 +28,8 @@ export default function () {
         itemType="code"
         focusScope="general"
       />
+      <hr className="sidebar-line" />
+      <ReportButton />
     </div>
   );
 }
