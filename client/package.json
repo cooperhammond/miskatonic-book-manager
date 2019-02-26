@@ -8,8 +8,7 @@
     "build": "react-scripts build",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
-    "test": "jest",
-    "dev": "nf start"
+    "test": "jest"
   },
   "homepage": "https://cooperhammond.github.io/miskatonic-book-manager",
   "jest": {

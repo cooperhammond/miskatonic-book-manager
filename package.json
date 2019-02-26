@@ -5,7 +5,6 @@
   "license": "MIT",
   "scripts": {
     "client-web": "cd client && yarn start",
-    "client-desktop": "cd client && yarn electron",
     "server": "cd server && yarn start",
     "dev": "nf start"
   },
