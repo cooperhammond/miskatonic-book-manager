@@ -3,7 +3,7 @@ import { Component } from 'react';
 
 import FocusStore from '../../stores/FocusStore';
 
-export default class App extends Component {
+class App extends Component {
 
   constructor(props) {
     super(props);
@@ -34,3 +34,5 @@ export default class App extends Component {
     return Render.call(this, this.props, this.state);
   }
 }
+
+export default App;

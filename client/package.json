@@ -30,7 +30,6 @@
   "dependencies": {
     "es6-promise": "^4.2.5",
     "flux": "^3.1.3",
-    "gh-pages": "^2.0.1",
     "immutability-helper": "^2.9.0",
     "keymirror": "^0.1.1",
     "node-sass": "^4.11.0",
@@ -47,6 +46,7 @@
     "babel-preset-react": "^6.24.1",
     "electron": "^3.0.13",
     "foreman": "^3.0.1",
+    "gh-pages": "^2.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.6.0",
     "react-test-renderer": "^16.6.3"
