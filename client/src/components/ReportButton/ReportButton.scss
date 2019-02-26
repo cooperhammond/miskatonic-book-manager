@@ -1,13 +1,19 @@
+.report-wrapper {
+  border-top: 2vh solid transparent;
+}
+
 .report-button {
   height: 10vh;
   width: 14vh;
 
-  background-image: linear-gradient(
-    to bottom right, 
-    rgba(140, 0, 255, 0.698),
-    rgba(0, 119, 255, 0.705), 
-  ), url("../../assets/document.svg");
-  background-position: left top, 6vh 2vh;
+  background-image: 
+    url("../../assets/document.svg"),
+    linear-gradient(
+      to bottom right, 
+      #64a7f6, 
+      #4a90e2,
+    );
+  background-position: 7vh 3vh, left top;
   background-repeat: no-repeat, no-repeat;
 
   display: flex;

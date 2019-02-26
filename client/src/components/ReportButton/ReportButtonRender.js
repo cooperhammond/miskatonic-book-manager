@@ -10,14 +10,16 @@ export default function (props, state) {
   }
 
   return (
-    <div
-      className={classString}
-      onClick={this.onClick}
-      onMouseDown={this.onMouseDown}
-      onMouseUp={this.onMouseUp}
-      onMouseLeave={this.onMouseUp}
-    >
-      <div>Download Report</div>
+    <div className="report-wrapper">
+      <div
+        className={classString}
+        onClick={this.onClick}
+        onMouseDown={this.onMouseDown}
+        onMouseUp={this.onMouseUp}
+        onMouseLeave={this.onMouseUp}
+      >
+        <div>Download Report</div>
+      </div>
     </div>
   );
 }

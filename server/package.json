@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "node src/server.js",
+    "start": "node server.js",
     "dev": "nodemon server.js"
   },
   "dependencies": {
@@ -12,6 +12,7 @@
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
+    "excel4node": "^1.7.0",
     "express": "^4.16.4",
     "flat": "^4.1.0",
     "mongoose": "^5.4.1",

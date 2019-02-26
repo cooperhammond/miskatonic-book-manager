@@ -1,0 +1,64 @@
+.statistic-boxes-wrapper {
+  display: flex;
+
+  .statistic-box {
+    width: 27vh;
+    height: 13vh;
+    margin: 0vh 0vh 0vh 7vh;
+  
+    background-repeat: no-repeat, no-repeat;
+
+    .title {
+      margin: .75vh 0vh 0vh 2vh;
+
+      text-align: left;
+      font-size: 2vh;
+      color: #FFFFFF;
+      font-weight: 500;
+    }
+
+    .number {
+      text-align: left;
+      margin: 1vh 0vh 0vh 4vh;
+
+      font-size: 5vh;
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+  }
+}
+
+.students-reading {
+  background-image: 
+    url("../../assets/student.svg"),
+    linear-gradient(
+      to bottom right, 
+      #8e70ee,
+      #2585bc, 
+    );
+  background-position: 16vh 1vh, left top;
+}
+
+.books-checked-out {
+  background-image:
+    url("../../assets/books.svg"),
+    linear-gradient(
+      to bottom right, 
+      #ff875e,
+      #fe67ad, 
+    );
+  background-position: 17vh 1vh, left top;
+  background-size: 14.5vh, 100%;
+}
+
+.unused-codes {
+  background-image: 
+    url("../../assets/tag.svg"),
+    linear-gradient(
+      to bottom right, 
+      #ee70e9,
+      #8363f9, 
+    );
+  background-size: 10vh, 100%;
+  background-position: 17vh 0vh, left top;
+}

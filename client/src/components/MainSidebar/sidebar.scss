@@ -1,7 +1,9 @@
 /* Sidebar! */
 .sidebar {
-  padding-top: .5em;
-  padding-bottom: .5em;
+  padding-top: .5vh;
+  padding-bottom: .5vh;
+  
+  height: auto;
 
   text-align: center;
 
@@ -9,8 +11,8 @@
     font-size: 1.4vh;
     background-color: #FFFFFF;
     color: #7e7e7e;
-    padding: .5em .5em .5em .5em;
-    margin: .5em 2.5em .5em 2.5em;
+    padding: .5vh .5vh .5vh .5vh;
+    margin: .5vh 2.5vh .5vh 2.6vh;
     cursor: pointer;
 
     display: inline-block;
