@@ -2,7 +2,7 @@
 inspo/
 
 # temp report file
-server/Report.xlsx
+./server/Report.xlsx
 
 # large database
 database/
