@@ -99,11 +99,13 @@ exports.genReport = async function (req, res) {
     row += 1;
   }
 
-  await workbook.write('Report.xlsx');
+  workbook.write('Report.xlsx', (err, stats) => {
+    if (err) { return res.status(500).err(err) }
 
-  res.setHeader('Content-disposition', `attachment;filename=data.xls`);
-  res.setHeader('Content-type', 'application/vnd.ms-excel');
-  res.status(200).download(path.join(__dirname, "../Report.xlsx"));
+    res.setHeader('Content-disposition', `attachment;filename=data.xls`);
+    res.setHeader('Content-type', 'application/vnd.ms-excel');
+    res.status(200).download(path.join(__dirname, "../Report.xlsx"));
+  });
 }
 
 function sortData(data, key) {
