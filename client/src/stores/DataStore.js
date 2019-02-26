@@ -9,14 +9,11 @@ import DataActionTypes from '../constants/DataActionTypes';
 var CHANGE_EVENT = 'change';
 
 var PROD_SERVER_URL = "https://miskatonic-book-manager-server.herokuapp.com";
-var DEV_SERVER_URL = "http://localhost:5200";
+var DEV_SERVER_URL = "http://localhost:5100";
 
 var SERVER_URL = process.env.NODE_ENV === "production" 
                   ? PROD_SERVER_URL 
                   : DEV_SERVER_URL;
-
-console.log(process);
-console.log(SERVER_URL);
 
 var _data = {
   student: [],

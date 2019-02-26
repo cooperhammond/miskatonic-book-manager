@@ -9,10 +9,8 @@
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
     "test": "jest",
-    "dev": "nf start",
-    "electron": "node meta/electron-wait-react.js"
+    "dev": "nf start"
   },
-  "main": "meta/electron-starter.js",
   "homepage": "https://cooperhammond.github.io/miskatonic-book-manager",
   "jest": {
     "moduleNameMapper": {

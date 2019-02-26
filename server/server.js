@@ -27,7 +27,7 @@ if (process.env.DB_USERNAME && process.env.DB_PASSWORD) {
 
 
 // Load the port to run on from the environment
-const port = process.env.PORT || 3200;
+const port = process.env.PORT || 5200;
 
 // connect our server's code with the database
 mongoose.connect(
