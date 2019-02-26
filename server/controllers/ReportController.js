@@ -99,7 +99,7 @@ exports.genReport = async function (req, res) {
     row += 1;
   }
 
-  workbook.write('Report.xlsx');
+  await workbook.write('Report.xlsx');
 
   res.setHeader('Content-disposition', `attachment;filename=data.xls`);
   res.setHeader('Content-type', 'application/vnd.ms-excel');
