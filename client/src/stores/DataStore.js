@@ -7,7 +7,16 @@ import AppDispatcher from '../dispatcher/AppDispatcher';
 import DataActionTypes from '../constants/DataActionTypes';
 
 var CHANGE_EVENT = 'change';
-var SERVER_URL = "http://localhost:3200";
+
+var PROD_SERVER_URL = "https://miskatonic-book-manager-server.herokuapp.com";
+var DEV_SERVER_URL = "http://localhost:5200";
+
+var SERVER_URL = process.env.NODE_ENV === "production" 
+                  ? PROD_SERVER_URL 
+                  : DEV_SERVER_URL;
+
+console.log(process);
+console.log(SERVER_URL);
 
 var _data = {
   student: [],
@@ -54,6 +63,10 @@ let DataStore = assign({}, EventEmitter.prototype, {
 
   getItemByIndex: function(itemType, index) {
     return _data[itemType][index];
+  },
+
+  getServerURL: function() {
+    return SERVER_URL;
   },
 
   emitChange: function() {

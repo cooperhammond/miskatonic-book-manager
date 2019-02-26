@@ -2,6 +2,8 @@ import { Component } from 'react';
 
 import Render from './ReportButtonRender';
 
+import DataStore from '../../stores/DataStore';
+
 class ReportButton extends Component {
 
   constructor(props) {
@@ -17,7 +19,8 @@ class ReportButton extends Component {
   }
 
   onClick() {
-    var url = "http://localhost:3200/report/download";
+    var url = `${DataStore.getServerURL()}/report/download`;
+    console.log(process.env);
 
     setTimeout(() => {
       const response = {
