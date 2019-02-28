@@ -1,15 +1,15 @@
 {
-  "main.css": "/miskatonic-book-manager/static/css/main.43ea0b2c.chunk.css",
-  "main.js": "/miskatonic-book-manager/static/js/main.e13658f6.chunk.js",
-  "main.js.map": "/miskatonic-book-manager/static/js/main.e13658f6.chunk.js.map",
-  "static/js/1.dfce1e80.chunk.js": "/miskatonic-book-manager/static/js/1.dfce1e80.chunk.js",
-  "static/js/1.dfce1e80.chunk.js.map": "/miskatonic-book-manager/static/js/1.dfce1e80.chunk.js.map",
+  "main.css": "/miskatonic-book-manager/static/css/main.0262cba7.chunk.css",
+  "main.js": "/miskatonic-book-manager/static/js/main.d1b70b71.chunk.js",
+  "main.js.map": "/miskatonic-book-manager/static/js/main.d1b70b71.chunk.js.map",
+  "static/js/1.dc7b236d.chunk.js": "/miskatonic-book-manager/static/js/1.dc7b236d.chunk.js",
+  "static/js/1.dc7b236d.chunk.js.map": "/miskatonic-book-manager/static/js/1.dc7b236d.chunk.js.map",
   "runtime~main.js": "/miskatonic-book-manager/static/js/runtime~main.397ea666.js",
   "runtime~main.js.map": "/miskatonic-book-manager/static/js/runtime~main.397ea666.js.map",
   "static/media/ReportButton.scss": "/miskatonic-book-manager/static/media/document.d43a8c08.svg",
   "static/media/StatisticBoxes.scss": "/miskatonic-book-manager/static/media/tag.f01955cd.svg",
-  "static/css/main.43ea0b2c.chunk.css.map": "/miskatonic-book-manager/static/css/main.43ea0b2c.chunk.css.map",
+  "static/css/main.0262cba7.chunk.css.map": "/miskatonic-book-manager/static/css/main.0262cba7.chunk.css.map",
   "index.html": "/miskatonic-book-manager/index.html",
-  "precache-manifest.8f46bf80a84f6d0e747f7e22169c3028.js": "/miskatonic-book-manager/precache-manifest.8f46bf80a84f6d0e747f7e22169c3028.js",
+  "precache-manifest.9bf59a6a9978856da167125e6d25a638.js": "/miskatonic-book-manager/precache-manifest.9bf59a6a9978856da167125e6d25a638.js",
   "service-worker.js": "/miskatonic-book-manager/service-worker.js"
 }

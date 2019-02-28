@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/miskatonic-book-manager/precache-manifest.8f46bf80a84f6d0e747f7e22169c3028.js"
+  "/miskatonic-book-manager/precache-manifest.9bf59a6a9978856da167125e6d25a638.js"
 );
 
 workbox.clientsClaim();
