@@ -16,6 +16,7 @@ class PopupForm extends Component {
     super(props);
     this.state = {
       scope: null,
+      focusItem: {},
       itemType: null,
       itemId: null,
       data: {},
@@ -104,6 +105,7 @@ class PopupForm extends Component {
       this.setState({
         scope: scope,
         itemId: itemId,
+        focusItem: focusItem,
         itemType: itemType,
         data: defaultItemData,
         associatedItems: associatedItems,

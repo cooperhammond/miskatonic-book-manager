@@ -10,6 +10,8 @@ import StudentForm from './forms/StudentForm';
 import BookForm from './forms/BookForm';
 import CodeForm from './forms/CodeForm';
 
+import QRCode from 'qrcode.react';
+
 export default function (props, state) {
 
   var itemType = state.itemType;
@@ -59,6 +61,14 @@ export default function (props, state) {
 
           <input type="submit" value="Submit" />
         </form>
+
+        {itemType === "code" && state.focusItem.code ?
+          <div>
+            <label>Redeem Code: </label>
+            <label>{state.focusItem.code}</label><br/>
+            <QRCode value={state.focusItem.code} />
+          </div>
+        : null}
 
       </div>
 
