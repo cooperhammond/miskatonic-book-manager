@@ -72,34 +72,38 @@ The server was created using `node`, and as such, uses the standard library for 
 Each of the items has a unique schema.
 
 The Student Schema has standard attributes like name and email, but also has an array of ObjectIds that reference to codes:
+
 | Key         | Attributes |
 |-------------|------------|
-| `firstName` | type: `String`, required: `true`
-| `lastName`  | type: `String`, required: `true`
-| `email`     | type: `String`, required: `true`
-| `grade`     | type: `Number`, required: `true`
-| `codes`     | type: `Array of ObjectIds`, default: `[]`
+| `firstName` | type: `String`, required: `true` |
+| `lastName`  | type: `String`, required: `true` |
+| `email`     | type: `String`, required: `true` |
+| `grade`     | type: `Number`, required: `true` |
+| `codes`     | type: `Array of ObjectIds`, default: `[]` |
 
 The Book Schema has standard attributes like title and author, but also has an array of ObjectIds that reference to codes:
+
 | Key     | Attributes |
 |-----------|------------|
-| `title`   | type: `String`, required: `true`
-| `author`  | type: `String`, required: `true`
-| `codes`   | type: `Array of ObjectIds`, default: `[]`
-| `readers` | type: `Number`, default: `0`
+| `title`   | type: `String`, required: `true` |
+| `author`  | type: `String`, required: `true` |
+| `codes`   | type: `Array of ObjectIds`, default: `[]` |
+| `readers` | type: `Number`, default: `0` |
 
-The Code Schema ties the books and students together. :
+The Code Schema ties the books and students together:
+
 | Key       | Attributes |
 |-----------|------------|
-| `code`    | type: `String`, default: `randomCodeGen`
-| `book`    | type: `ObjectId`, reference: `Book`, required: `true`
-| `student` | type: `ObjectId`, reference: `Student`
+| `code`    | type: `String`, default: `randomCodeGen` |
+| `book`    | type: `ObjectId`, reference: `Book`, required: `true` |
+| `student` | type: `ObjectId`, reference: `Student` |
 
 All of the models have hooks built in to delete references of themselves when they're deleted, so as to retain database integrity.
 
 ##### Routes
 
 With the three item types being `students`, `books`, and `codes`, there are 5 root routes for each item type:
+
 |         Route         | Request Type | Description |
 |-----------------------|--------------|-------------|
 |`/:itemtype/create`    | `POST`       | Creates the item |
