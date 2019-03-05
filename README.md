@@ -11,7 +11,7 @@ This project was created using `Javascript`'s `node.js`. The project includes bo
 
 # `/client`
 
-The client is created as its own, self-contained `node` project that can be run on any `JavaScript` compatible web server. Currently, it is running on Github Pages, **[here](https://cooperhammond.github.io/miskatonic-book-manager/)**. *Please note that once you access this page, the heroku server will take maybe 10 seconds to boot up, and as such, it will display that there is no data available.*
+The client is created as its own, self-contained `node` project that can be run on any `JavaScript` compatible web server. Currently, it is running on Github Pages, **[here](https://cooperhammond.github.io/miskatonic-book-manager/)**. *Please note that once you access this page, the heroku server will take maybe 10 seconds to boot up, and as such, it will display that there is no data available until it has fully booted up and downloaded the data.*
 
 ### Developement
 
