@@ -27,16 +27,20 @@ The Miskatonic Book Manager client has two stores:
 
 The Data Store has actions based on the [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) database principle:
 
-> C: `createItem(itemType, data)`
-> R: `readItems(itemType)`
-> U: `updateItem(itemType, id, data)`
-> D: `deleteItem(itemType, id)`
+```
+C: createItem(itemType, data)
+R: readItems(itemType)
+U: updateItem(itemType, id, data)
+D: deleteItem(itemType, id)
+```
 
 The Focus Store has actions to change the view of the GUI:
 
-> `changeView(args)`
-> `closePopup()`
-> `openPopup()`
+```
+changeView(args)
+closePopup()
+openPopup()
+```
 
 In total, there are 10 different components that make up the GUI: `AppRender`, `DataDisplayTable`, `DeleteButton`, `MainFocusBox`, `MainSidebar`, `Popup`, `ReportButton`, `SideFocusButton`, and `StatisticBoxes`.
 
