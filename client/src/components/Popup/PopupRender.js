@@ -62,12 +62,12 @@ export default function (props, state) {
           <input type="submit" value="Submit" />
         </form>
 
-        {itemType === "code" && state.focusItem.code ?
+        {itemType === "code" && state.focusItem ?
           <div>
             <label>Redeem Code: </label>
             <label>{state.focusItem.code}</label><br/>
             <QRCode value={state.focusItem.code} />
-          </div>
+          </div>          
         : null}
 
       </div>

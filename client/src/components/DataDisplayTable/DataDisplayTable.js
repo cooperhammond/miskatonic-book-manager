@@ -72,7 +72,9 @@ class DataDisplayTable extends Component {
       accessors = [
         (d) => {
           var book = DataStore.getItemById("book", d.book);
-          return book.title;
+          if (book) {
+            return book.title;
+          }
         },
         "code",
         (d) => {
