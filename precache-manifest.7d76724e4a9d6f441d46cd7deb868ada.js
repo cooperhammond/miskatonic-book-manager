@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "d1b70b71abe3500ef40a",
-    "url": "/miskatonic-book-manager/static/css/main.0262cba7.chunk.css"
+    "revision": "9ded72f7f525904ebf54",
+    "url": "/miskatonic-book-manager/static/css/main.eef62013.chunk.css"
   },
   {
-    "revision": "d1b70b71abe3500ef40a",
-    "url": "/miskatonic-book-manager/static/js/main.d1b70b71.chunk.js"
+    "revision": "9ded72f7f525904ebf54",
+    "url": "/miskatonic-book-manager/static/js/main.9ded72f7.chunk.js"
   },
   {
     "revision": "dc7b236d3204bd707374",
@@ -24,15 +24,15 @@ self.__precacheManifest = [
     "url": "/miskatonic-book-manager/static/media/student.30a0d962.svg"
   },
   {
-    "revision": "c2e88fc1095a46c5f659baa5a5770dea",
-    "url": "/miskatonic-book-manager/static/media/books.c2e88fc1.svg"
-  },
-  {
     "revision": "f01955cd4340b6066039c1d155ab06b0",
     "url": "/miskatonic-book-manager/static/media/tag.f01955cd.svg"
   },
   {
-    "revision": "03c6f51afc93555e940788f836901d4a",
+    "revision": "c2e88fc1095a46c5f659baa5a5770dea",
+    "url": "/miskatonic-book-manager/static/media/books.c2e88fc1.svg"
+  },
+  {
+    "revision": "6d9de5a1aebed7c3475c67081b33fff7",
     "url": "/miskatonic-book-manager/index.html"
   }
 ];
