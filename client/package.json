@@ -44,7 +44,7 @@
     "babel-jest": "^23.6.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "electron": "^3.0.13",
+    "electron": "^9.4.0",
     "foreman": "^3.0.1",
     "gh-pages": "^2.0.1",
     "identity-obj-proxy": "^3.0.0",
